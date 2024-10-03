@@ -5,6 +5,8 @@
 	quotepath = false
 	autocrlf = false
 	pager = delta
+[init]
+	defaultBranch = main
 [pull]
 	rebase = false
 [diff]
