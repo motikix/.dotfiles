@@ -1,0 +1,151 @@
+* {
+  border: none;
+  border-radius: 0;
+  font-family: Roboto Mono;
+  font-size: 9px;
+  font-weight: bold;
+  min-height: 12px;
+}
+
+window#waybar {
+  background: transparent;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+#window {
+  margin-top: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-radius: 26px;
+  transition: none;
+  color: transparent;
+  background: transparent;
+}
+
+#workspaces {
+  margin-top: 8px;
+  margin-left: 12px;
+  margin-bottom: 0;
+  border-radius: 26px;
+  background: #282c34;
+  transition: none;
+}
+
+#workspaces button {
+  transition: none;
+  color: #abb2bf;
+  background: transparent;
+  font-size: 16px;
+}
+
+#workspaces button.focused {
+  color: #98c379;
+}
+
+#workspaces button:hover {
+  transition: none;
+  box-shadow: inherit;
+  text-shadow: inherit;
+  color: #c678dd;
+}
+
+#custom-spotify {
+  margin-top: 8px;
+  margin-left: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-bottom: 0;
+  border-radius: 26px;
+  transition: none;
+  color: #282c34;
+  background: #98c379;
+}
+
+#network {
+  margin-top: 8px;
+  margin-left: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-bottom: 0;
+  border-radius: 26px;
+  transition: none;
+  color: #282c34;
+  background: #c678dd;
+}
+
+#pulseaudio {
+  margin-top: 8px;
+  margin-left: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-bottom: 0;
+  border-radius: 26px;
+  transition: none;
+  color: #282c34;
+  background: #56b6c2;
+}
+
+#temperature {
+  margin-top: 8px;
+  margin-left: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-bottom: 0;
+  border-radius: 26px;
+  transition: none;
+  color: #282c34;
+  background: #98c379;
+}
+
+#cpu {
+  margin-top: 8px;
+  margin-left: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-bottom: 0;
+  border-radius: 26px;
+  transition: none;
+  color: #282c34;
+  background: #e5c07b;
+}
+
+#memory {
+  margin-top: 8px;
+  margin-left: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-bottom: 0;
+  border-radius: 26px;
+  transition: none;
+  color: #282c34;
+  background: #ffb86c;
+}
+
+#battery {
+  margin-top: 8px;
+  margin-left: 8px;
+  padding-left: 16px;
+  padding-right: 8px;
+  margin-bottom: 0;
+  border-radius: 26px;
+  transition: none;
+  color: #282c34;
+  background: #e06c75;
+}
+
+#clock {
+  margin-top: 8px;
+  margin-left: 8px;
+  margin-right: 12px;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-bottom: 0;
+  border-radius: 26px;
+  transition: none;
+  color: #abb2bf;
+  background: #282c34;
+}
+
