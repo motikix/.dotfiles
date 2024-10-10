@@ -1,3 +1,5 @@
+[include]
+	path = "~/.config/delta/themes/catppuccin.gitconfig"
 [user]
 	name = motikix
 	email = 25551031+motikix@users.noreply.github.com
@@ -18,6 +20,7 @@
 [delta]
 	navigate = true
 	side-by-side = true
+	features = catppuccin-mocha
 [ghq]
 	root = ~/.local/src
 [url "https://"]
