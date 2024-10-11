@@ -1,6 +1,7 @@
 local opts = require('config').opts
 local opts_silent = require('config').opts_silent
 local sign = require('config').sign
+local cmp_kinds = require('config').cmp_kinds
 
 return {
   -- Color
@@ -688,10 +689,11 @@ return {
       local types = require('cmp.types')
       local lspkind = require('lspkind')
       lspkind.init({})
+      local luasnip = require('luasnip')
       cmp.setup({
         snippet = {
           expand = function(args)
-            require('luasnip').lsp_expand(args.body)
+            luasnip.lsp_expand(args.body)
           end,
         },
         mapping = cmp.mapping.preset.insert({
@@ -704,8 +706,40 @@ return {
           ['<C-b>'] = cmp.mapping.scroll_docs(-4),
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
           ['<C-Space>'] = cmp.mapping.complete(),
-          ['<C-e>'] = cmp.mapping.close(),
-          ['<CR>'] = cmp.mapping.confirm({ select = false }),
+          ['<C-e>'] = cmp.mapping.abort(),
+          ['<CR>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              if luasnip.expandable() then
+                luasnip.expand()
+              else
+                cmp.confirm({
+                  select = true,
+                })
+              end
+            else
+              fallback()
+            end
+          end),
+
+          ['<Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            elseif luasnip.locally_jumpable(1) then
+              luasnip.jump(1)
+            else
+              fallback()
+            end
+          end, { 'i', 's' }),
+
+          ['<S-Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            elseif luasnip.locally_jumpable(-1) then
+              luasnip.jump(-1)
+            else
+              fallback()
+            end
+          end, { 'i', 's' }),
         }),
         sources = cmp.config.sources({
           { name = 'orgmode' },
@@ -718,19 +752,18 @@ return {
           { name = 'buffer' },
         }),
         formatting = {
-          format = function(entry, vim_item)
-            return lspkind.cmp_format({
-              mode = 'symbol_text',
-              menu = {
-                buffer = '[Buffer]',
-                nvim_lsp = '[LSP]',
-                luasnip = '[LuaSnip]',
-                nvim_lua = '[Lua]',
-                latex_symbols = '[Latex]',
-                treesitter = '[TS]',
-                emoji = '[Emoji]',
-              },
-            })(entry, vim_item)
+          format = function(entry, item)
+            item.kind = string.format('%s %s', cmp_kinds[item.kind], item.kind)
+            item.menu = ({
+              buffer = '[Buffer]',
+              nvim_lsp = '[LSP]',
+              luasnip = '[LuaSnip]',
+              nvim_lua = '[Lua]',
+              latex_symbols = '[LaTeX]',
+              treesitter = '[TS]',
+              emoji = '[Emoji]',
+            })[entry.source.name]
+            return item
           end,
         },
       })
