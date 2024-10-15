@@ -96,34 +96,31 @@ return {
 
   -- Explorer
   {
-    'nvim-neo-tree/neo-tree.nvim',
-    branch = 'v3.x',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-tree/nvim-web-devicons',
-      'MunifTanjim/nui.nvim',
-    },
+    'stevearc/oil.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
     init = function()
-      vim.api.nvim_set_keymap('n', '\\', ':Neotree reveal toggle<CR>', opts)
+      vim.api.nvim_set_keymap('n', '\\', ':Oil<CR>', opts)
     end,
-    opts = {
-      window = {
-        position = 'current',
-      },
-      filesystem = {
-        filtered_items = {
-          visible = true,
+    config = function()
+      function _G.get_oil_winbar()
+        local dir = require('oil').get_current_dir()
+        if dir then
+          return vim.fn.fnamemodify(dir, ':~')
+        else
+          return vim.api.nvim_buf_get_name(0)
+        end
+      end
+
+      require('oil').setup({
+        win_options = {
+          winbar = '%!v:lua.get_oil_winbar()',
         },
-      },
-    },
-  },
-  {
-    'antosha417/nvim-lsp-file-operations',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-neo-tree/neo-tree.nvim',
-    },
-    config = true,
+        watch_for_changes = true,
+        view_options = {
+          show_hidden = true,
+        },
+      })
+    end,
   },
 
   -- Window
