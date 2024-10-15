@@ -117,7 +117,7 @@ return {
         },
         watch_for_changes = true,
         view_options = {
-          show_hidden = true,
+          show_hidden = false,
         },
       })
     end,
@@ -227,13 +227,34 @@ return {
     'nvim-telescope/telescope.nvim',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+      {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release',
+      },
       'rcarriga/nvim-notify',
     },
     config = function()
       local telescope = require('telescope')
       telescope.setup({
+        defaults = {
+          vimgrep_arguments = {
+            'rg',
+            '--color=never',
+            '--no-heading',
+            '--with-filename',
+            '--line-number',
+            '--column',
+            '--smart-case',
+            '--hidden',
+          },
+        },
         extensions = {
+          fzf = {
+            fuzzy = true,
+            override_generic_sorter = true,
+            override_file_sorter = true,
+            case_mode = 'smart_case',
+          },
           termfinder = {
             mappings = {
               rename_term = '<C-r>',
@@ -252,13 +273,7 @@ return {
       vim.api.nvim_set_keymap(
         'n',
         '<Leader>ff',
-        ':Telescope find_files find_command=rg,--files theme=get_dropdown<CR>',
-        opts
-      )
-      vim.api.nvim_set_keymap(
-        'n',
-        '<Leader>fF',
-        ':Telescope find_files find_command=rg,--ignore,--hidden,--files theme=get_dropdown<CR>',
+        ':Telescope find_files find_command=rg,--ignore,--hidden,--no-ignore,--files theme=get_dropdown<CR>',
         opts
       )
       vim.api.nvim_set_keymap('n', '<Leader>fg', ':Telescope live_grep theme=get_dropdown<CR>', opts)
