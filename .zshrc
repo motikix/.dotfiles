@@ -33,7 +33,7 @@ export GPG_TTY=$(tty)
 export FZF_LEGACY_KEYBINDINGS=0
 export FZF_ENABLE_OPEN_PREVIEW=1
 export FZF_PREVIEW_FILE_CMD='bat --color=always --style=numbers'
-export FZF_PREVIEW_DIR_CMD='exa -1 --color=always'
+export FZF_PREVIEW_DIR_CMD='eza -1 --color=always'
 export FZF_DEFAULT_COMMAND='fd --hidden --follow --exclude .git'
 export FZF_FIND_FILE_COMMAND="$FZF_DEFAULT_COMMAND --type f . \$dir"
 export FZF_CD_COMMAND="$FZF_DEFAULT_COMMAND --type d --no-hidden . \$dir"
@@ -117,10 +117,10 @@ _exists_cmd nvim && {
   alias vim='nvim'
   alias vi='nvim --noplugin -c "set nohlsearch" -c "set inccommand=" -c "highlight Normal ctermbg=none guibg=none"'
 }
-_exists_cmd exa && {
-  alias ls='exa --icons'
-  alias ll='exa -lh --git --icons'
-  alias tree='exa -T --icons'
+_exists_cmd eza && {
+  alias ls='eza --icons'
+  alias ll='eza --icons -l --header --git --git-repos --time-style=long-iso'
+  alias tree='eza --icons -l -T --header --git --git-repos --time-style=long-iso -I=.git'
 }
 _exists_cmd bat && alias cat='bat'
 _exists_cmd zoxide && {
@@ -202,7 +202,7 @@ zinit light Aloxaf/fzf-tab
 zstyle ':completion:*:git-checkout:*' sort false
 zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 zstyle ':fzf-tab:*' switch-group ',' '.'
 zstyle ':fzf-tab:*' fzf-min-height 20
 

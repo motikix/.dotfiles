@@ -53,7 +53,6 @@ return {
               background = true,
             },
           },
-          neotree = true,
           noice = true,
           telescope = true,
           treesitter = true,
@@ -74,8 +73,11 @@ return {
     event = 'VeryLazy',
     dependencies = {
       'MunifTanjim/nui.nvim',
-      'rcarriga/nvim-notify',
     },
+    init = function()
+      vim.api.nvim_set_keymap('n', '<Leader>nn', ':Noice<CR>', opts)
+    end,
+    config = true,
     opts = {
       lsp = {
         override = {
@@ -117,7 +119,7 @@ return {
         },
         watch_for_changes = true,
         view_options = {
-          show_hidden = false,
+          show_hidden = true,
         },
       })
     end,
@@ -231,7 +233,6 @@ return {
         'nvim-telescope/telescope-fzf-native.nvim',
         build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release',
       },
-      'rcarriga/nvim-notify',
     },
     config = function()
       local telescope = require('telescope')
@@ -288,8 +289,6 @@ return {
       vim.api.nvim_set_keymap('n', 'gi', ':Telescope lsp_implementations theme=get_dropdown<CR>', opts)
       -- tree sitter
       vim.api.nvim_set_keymap('n', '<Leader>ts', ':Telescope treesitter theme=get_dropdown<CR>', opts)
-      -- notify
-      vim.api.nvim_set_keymap('n', '<Leader>tn', ':Telescope notify theme=get_dropdown<CR>', opts)
     end,
   },
 
