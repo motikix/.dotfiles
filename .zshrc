@@ -30,22 +30,16 @@ export PATH=$HOME/.local/bin:$PATH
 export GPG_TTY=$(tty)
 
 # fzf
-export FZF_LEGACY_KEYBINDINGS=0
-export FZF_ENABLE_OPEN_PREVIEW=1
 export FZF_PREVIEW_FILE_CMD='bat --color=always --style=numbers'
 export FZF_PREVIEW_DIR_CMD='eza -1 --color=always'
 export FZF_DEFAULT_COMMAND='fd --hidden --follow --exclude .git'
-export FZF_FIND_FILE_COMMAND="$FZF_DEFAULT_COMMAND --type f . \$dir"
-export FZF_CD_COMMAND="$FZF_DEFAULT_COMMAND --type d --no-hidden . \$dir"
-export FZF_CD_WITH_HIDDEN_COMMAND="$FZF_DEFAULT_COMMAND --type d . \$dir"
-export FZF_OPEN_COMMAND="$FZF_DEFAULT_COMMAND --type f --type d . \$dir"
 export FZF_DEFAULT_OPTS="\
   --height 40% --layout=reverse --border --bind ctrl-u:preview-up,ctrl-d:preview-down \
   --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
   --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
   --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
-export FZF_FIND_FILE_OPTS="--preview '$FZF_PREVIEW_FILE_CMD {}'"
-export FZF_CD_OPTS="--preview '$FZF_PREVIEW_DIR_CMD {}'"
+export FZF_CTRL_T_OPTS="--preview '$FZF_PREVIEW_FILE_CMD {}'"
+export FZF_ALT_C_OPTS="--preview '$FZF_PREVIEW_DIR_CMD {}'"
 
 # go
 export GOPATH=$HOME/go
