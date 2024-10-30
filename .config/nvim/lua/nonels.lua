@@ -19,26 +19,6 @@ M.setup = function()
       nls.builtins.formatting.stylelint,
       -- dart
       nls.builtins.formatting.dart_format,
-      -- python
-      require('none-ls.diagnostics.ruff'),
-      require('none-ls.formatting.ruff').with({
-        generator_opts = {
-          command = 'ruff',
-          args = {
-            'check',
-            '--fix',
-            '--select',
-            'I',
-            '-n',
-            '-e',
-            '--stdin-filename',
-            '$FILENAME',
-            '-',
-          },
-          to_stdin = true,
-        },
-      }),
-      require('none-ls.formatting.ruff_format'),
       -- lua
       nls.builtins.formatting.stylua,
       -- editorconfig

@@ -138,6 +138,15 @@ M.setup = function()
   lsp.pyright.setup({
     on_attach = M.on_attach,
     capabilities = capabilities,
+    settings = {
+      pyright = {
+        disableOrganizeImports = true,
+      },
+    },
+  })
+  lsp.ruff.setup({
+    on_attach = M.on_attach,
+    capabilities = capabilities,
   })
   lsp.lua_ls.setup({
     on_attach = M.on_attach,
