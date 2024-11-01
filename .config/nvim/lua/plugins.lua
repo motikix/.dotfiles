@@ -29,12 +29,11 @@ return {
           types = { 'italic' },
         },
         integrations = {
-          bufferline = true,
-          cmp = true,
-          gitsigns = true,
+          dropbar = {
+            enabled = true,
+          },
           hop = true,
           lsp_trouble = true,
-          markdown = true,
           native_lsp = {
             enabled = true,
             virtual_text = {
@@ -54,9 +53,7 @@ return {
             },
           },
           noice = true,
-          telescope = true,
-          treesitter = true,
-          treesitter_context = true,
+          nvim_surround = true,
         },
       })
       vim.cmd([[colorscheme catppuccin]])
@@ -205,6 +202,16 @@ return {
       })
     end,
   },
+  {
+    'Bekaboo/dropbar.nvim',
+    dependencies = {
+      'nvim-telescope/telescope-fzf-native.nvim',
+    },
+    init = function()
+      vim.api.nvim_set_keymap('n', '<Leader>ds', '<Cmd>lua require("dropbar.api").pick()<CR>', opts)
+    end,
+    config = true,
+  },
 
   -- Treesitter
   {
@@ -247,6 +254,7 @@ return {
             '--column',
             '--smart-case',
             '--hidden',
+            '--trim',
           },
         },
         extensions = {
@@ -475,7 +483,12 @@ return {
     },
   },
   { 'gpanders/editorconfig.nvim' },
-  { 'tpope/vim-surround' },
+  {
+    'kylechui/nvim-surround',
+    version = '*',
+    event = 'VeryLazy',
+    config = true,
+  },
   { 'andymass/vim-matchup' },
   {
     'norcalli/nvim-colorizer.lua',
@@ -699,7 +712,6 @@ return {
       end
       local types = require('cmp.types')
       local lspkind = require('lspkind')
-      lspkind.init({})
       local luasnip = require('luasnip')
       cmp.setup({
         snippet = {
@@ -731,20 +743,18 @@ return {
               fallback()
             end
           end),
-
           ['<Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
-              cmp.select_next_item()
+              cmp.select_next_item({ behavior = types.cmp.SelectBehavior.Select })
             elseif luasnip.locally_jumpable(1) then
               luasnip.jump(1)
             else
               fallback()
             end
           end, { 'i', 's' }),
-
           ['<S-Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
-              cmp.select_prev_item()
+              cmp.select_prev_item({ behavior = types.cmp.SelectBehavior.Select })
             elseif luasnip.locally_jumpable(-1) then
               luasnip.jump(-1)
             else
@@ -753,29 +763,31 @@ return {
           end, { 'i', 's' }),
         }),
         sources = cmp.config.sources({
-          { name = 'orgmode' },
           { name = 'nvim_lsp' },
           { name = 'treesitter' },
           { name = 'luasnip' },
+          { name = 'orgmode' },
           { name = 'emoji' },
           { name = 'path' },
+          { name = 'codeium' },
         }, {
           { name = 'buffer' },
         }),
         formatting = {
-          format = function(entry, item)
-            item.kind = string.format('%s %s', cmp_kinds[item.kind], item.kind)
-            item.menu = ({
-              buffer = '[Buffer]',
-              nvim_lsp = '[LSP]',
-              luasnip = '[LuaSnip]',
-              nvim_lua = '[Lua]',
-              latex_symbols = '[LaTeX]',
-              treesitter = '[TS]',
-              emoji = '[Emoji]',
-            })[entry.source.name]
-            return item
-          end,
+          format = lspkind.cmp_format({
+            mode = 'symbol_text',
+            maxwidth = {
+              menu = 50,
+              abbr = 50,
+            },
+            ellipsis_char = '...',
+            show_labelDetails = true,
+            before = function(entry, item)
+              item.kind = string.format('%s %s', cmp_kinds[item.kind], item.kind)
+              item.menu = ''
+              return item
+            end,
+          }),
         },
       })
       cmp.setup.cmdline({ '/', '?' }, {
@@ -795,8 +807,12 @@ return {
     end,
   },
   {
-    'Exafunction/codeium.vim',
-    event = 'BufEnter',
+    'Exafunction/codeium.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'hrsh7th/nvim-cmp',
+    },
+    config = true,
   },
 
   -- Syntax Highlight / Language Support

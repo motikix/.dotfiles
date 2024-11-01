@@ -122,7 +122,6 @@ vim.o.smartcase = true
 vim.o.incsearch = true
 vim.o.wrapscan = true
 vim.o.hlsearch = true
-vim.api.nvim_set_keymap('n', '<Esc><Esc>', ':nohl<Cr>', opts)
 
 -- Diagnostic
 vim.api.nvim_set_keymap('n', '[d', '<Cmd>lua vim.diagnostic.goto_prev({ float = false })<Cr>', opts)

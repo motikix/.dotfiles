@@ -42,6 +42,7 @@ M.cmp_kinds = {
   Event = ' ',
   Operator = '󰆕 ',
   TypeParameter = '󰅲 ',
+  Codeium = ' ',
 }
 
 return M

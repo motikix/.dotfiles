@@ -81,10 +81,24 @@ M.setup = function()
   lsp.rust_analyzer.setup({
     on_attach = M.on_attach,
     capabilities = capabilities,
+    settings = {
+      ['rust-analyzer'] = {
+        completion = {
+          callable = {
+            snippets = 'none',
+          },
+        },
+      },
+    },
   })
   lsp.zls.setup({
     on_attach = M.on_attach,
     capabilities = capabilities,
+    settings = {
+      zls = {
+        enable_argument_placeholders = false,
+      },
+    },
   })
   lsp.ts_ls.setup({
     on_attach = M.on_attach,
