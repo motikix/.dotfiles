@@ -763,13 +763,13 @@ return {
           end, { 'i', 's' }),
         }),
         sources = cmp.config.sources({
+          { name = 'codeium' },
+          { name = 'luasnip' },
           { name = 'nvim_lsp' },
           { name = 'treesitter' },
-          { name = 'luasnip' },
           { name = 'orgmode' },
           { name = 'emoji' },
           { name = 'path' },
-          { name = 'codeium' },
         }, {
           { name = 'buffer' },
         }),
