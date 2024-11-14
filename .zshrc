@@ -49,6 +49,7 @@ export PATH=$GOPATH/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
 
 # python
+export PYTHONDONTWRITEBYTECODE=1
 export PIPENV_VENV_IN_PROJECT=true
 export PIPENV_VERBOSITY=-1
 
