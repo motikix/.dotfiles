@@ -54,6 +54,7 @@ return {
           },
           noice = true,
           nvim_surround = true,
+          render_markdown = true,
         },
       })
       vim.cmd([[colorscheme catppuccin]])
@@ -72,7 +73,7 @@ return {
       'MunifTanjim/nui.nvim',
     },
     init = function()
-      vim.api.nvim_set_keymap('n', '<Leader>nn', ':Noice<CR>', opts)
+      vim.api.nvim_set_keymap('n', '<Leader>nn', ':NoiceAll<CR>', opts)
     end,
     config = true,
     opts = {
@@ -751,7 +752,6 @@ return {
           end, { 'i', 's' }),
         }),
         sources = cmp.config.sources({
-          { name = 'codeium' },
           { name = 'luasnip' },
           { name = 'nvim_lsp' },
           { name = 'treesitter' },
@@ -794,22 +794,55 @@ return {
       })
     end,
   },
+
+  -- Generative AI
   {
-    'Exafunction/codeium.nvim',
+    'olimorris/codecompanion.nvim',
     dependencies = {
       'nvim-lua/plenary.nvim',
+      'nvim-treesitter/nvim-treesitter',
       'hrsh7th/nvim-cmp',
+      'nvim-telescope/telescope.nvim',
     },
-    config = true,
+    config = function()
+      require('codecompanion').setup({
+        opts = {
+          language = 'Japanese',
+        },
+        strategies = {
+          chat = {
+            adapter = 'openai',
+          },
+          inline = {
+            adapter = 'openai',
+          },
+        },
+        adapters = {
+          openai = function()
+            return require('codecompanion.adapters').extend('openai', {
+              env = {
+                api_key = 'cmd:gpg --decrypt ~/.openai-api-key.gpg 2> /dev/null',
+              },
+              schema = {
+                model = {
+                  default = 'gpt-4o-mini',
+                },
+              },
+            })
+          end,
+        },
+      })
+    end,
   },
 
   -- Syntax Highlight / Language Support
   {
-    'ellisonleao/glow.nvim',
-    cmd = 'Glow',
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
     opts = {
-      border = 'rounded',
+      file_types = { 'markdown', 'codecompanion' },
     },
+    ft = { 'markdown', 'codecompanion' },
   },
   { 'dhruvasagar/vim-table-mode' },
   {
@@ -890,22 +923,18 @@ return {
   -- Rest Client
   {
     'jellydn/hurl.nvim',
-    dependencies = { 'MunifTanjim/nui.nvim' },
+    dependencies = {
+      'MunifTanjim/nui.nvim',
+      'nvim-lua/plenary.nvim',
+      'nvim-treesitter/nvim-treesitter',
+    },
     ft = 'hurl',
     opts = {
       debug = false,
-      mode = 'split',
       show_notification = true,
+      mode = 'split',
       auto_close = false,
       env_file = { '.env' },
-      formatters = {
-        json = { 'jq' },
-        html = {
-          'prettier',
-          '--parser',
-          'html',
-        },
-      },
     },
     keys = {
       { '<Leader>ha', ':HurlRunnerAt<CR>' },
