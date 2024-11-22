@@ -804,6 +804,14 @@ return {
       'hrsh7th/nvim-cmp',
       'nvim-telescope/telescope.nvim',
     },
+    init = function()
+      vim.api.nvim_set_keymap('n', '<Leader>ci', ':CodeCompanion<CR>', opts)
+      vim.api.nvim_set_keymap('v', '<Leader>ci', ':CodeCompanion<CR>', opts)
+      vim.api.nvim_set_keymap('n', '<Leader>cn', ':CodeCompanionChat<CR>', opts)
+      vim.api.nvim_set_keymap('v', '<Leader>cn', ':CodeCompanionChat<CR>', opts)
+      vim.api.nvim_set_keymap('n', '<Leader>cc', ':CodeCompanionChat Toggle<CR>', opts)
+      vim.api.nvim_set_keymap('v', '<Leader>cc', ':CodeCompanionChat Toggle<CR>', opts)
+    end,
     config = function()
       require('codecompanion').setup({
         opts = {
@@ -816,12 +824,15 @@ return {
           inline = {
             adapter = 'openai',
           },
+          cmd = {
+            adapter = 'openai',
+          },
         },
         adapters = {
           openai = function()
             return require('codecompanion.adapters').extend('openai', {
               env = {
-                api_key = 'cmd:gpg --decrypt ~/.openai-api-key.gpg 2> /dev/null',
+                api_key = 'cmd:cat ~/.openai-api-key 2> /dev/null',
               },
               schema = {
                 model = {

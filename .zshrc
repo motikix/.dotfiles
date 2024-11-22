@@ -41,6 +41,9 @@ export FZF_DEFAULT_OPTS="\
 export FZF_CTRL_T_OPTS="--preview '$FZF_PREVIEW_FILE_CMD {}'"
 export FZF_ALT_C_OPTS="--preview '$FZF_PREVIEW_DIR_CMD {}'"
 
+# miniserve
+export MINISERVE_INDEX=index.html
+
 # go
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
