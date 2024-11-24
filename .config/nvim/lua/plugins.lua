@@ -797,53 +797,54 @@ return {
 
   -- Generative AI
   {
-    'olimorris/codecompanion.nvim',
+    'yetone/avante.nvim',
+    event = 'VeryLazy',
+    lazy = false,
+    version = false,
+    build = 'make',
     dependencies = {
-      'nvim-lua/plenary.nvim',
       'nvim-treesitter/nvim-treesitter',
-      'hrsh7th/nvim-cmp',
-      'nvim-telescope/telescope.nvim',
-    },
-    init = function()
-      vim.api.nvim_set_keymap('n', '<Leader>ci', ':CodeCompanion<CR>', opts)
-      vim.api.nvim_set_keymap('v', '<Leader>ci', ':CodeCompanion<CR>', opts)
-      vim.api.nvim_set_keymap('n', '<Leader>cn', ':CodeCompanionChat<CR>', opts)
-      vim.api.nvim_set_keymap('v', '<Leader>cn', ':CodeCompanionChat<CR>', opts)
-      vim.api.nvim_set_keymap('n', '<Leader>cc', ':CodeCompanionChat Toggle<CR>', opts)
-      vim.api.nvim_set_keymap('v', '<Leader>cc', ':CodeCompanionChat Toggle<CR>', opts)
-    end,
-    config = function()
-      require('codecompanion').setup({
+      'stevearc/dressing.nvim',
+      'nvim-lua/plenary.nvim',
+      'MunifTanjim/nui.nvim',
+      'nvim-tree/nvim-web-devicons',
+      {
+        'HakonHarnes/img-clip.nvim',
+        event = 'VeryLazy',
         opts = {
-          language = 'Japanese',
-        },
-        strategies = {
-          chat = {
-            adapter = 'openai',
-          },
-          inline = {
-            adapter = 'openai',
-          },
-          cmd = {
-            adapter = 'openai',
+          default = {
+            embed_image_as_base64 = false,
+            prompt_for_file_name = false,
+            drag_and_drop = {
+              insert_mode = true,
+            },
+            use_absolute_path = true,
           },
         },
-        adapters = {
-          openai = function()
-            return require('codecompanion.adapters').extend('openai', {
-              env = {
-                api_key = 'cmd:cat ~/.openai-api-key 2> /dev/null',
-              },
-              schema = {
-                model = {
-                  default = 'gpt-4o-mini',
-                },
-              },
-            })
-          end,
+      },
+      {
+        'MeanderingProgrammer/render-markdown.nvim',
+        opts = {
+          file_types = { 'markdown', 'Avante' },
         },
-      })
-    end,
+        ft = { 'markdown', 'Avante' },
+      },
+    },
+    opts = {
+      provider = 'openai',
+      auto_suggestions_provider = 'openai',
+      openai = {
+        model = 'gpt-4o-mini',
+      },
+      behaviour = {
+        auto_suggestions = false,
+      },
+      windows = {
+        ask = {
+          start_insert = false,
+        },
+      },
+    },
   },
 
   -- Syntax Highlight / Language Support
