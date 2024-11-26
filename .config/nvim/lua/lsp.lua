@@ -106,6 +106,10 @@ M.setup = function()
     root_dir = lsp.util.root_pattern('package.json'),
     single_file_support = false,
   })
+  lsp.emmet_language_server.setup({
+    on_attach = M.on_attach,
+    capabilities = capabilities,
+  })
   lsp.tailwindcss.setup({
     on_attach = M.on_attach,
     capabilities = capabilities,
