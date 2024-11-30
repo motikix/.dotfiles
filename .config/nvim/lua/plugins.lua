@@ -831,10 +831,10 @@ return {
       },
     },
     opts = {
-      provider = 'openai',
-      auto_suggestions_provider = 'openai',
+      provider = 'claude',
+      auto_suggestions_provider = 'claude',
       openai = {
-        model = 'gpt-4o-mini',
+        model = 'claude-3-5-haiku-20241022',
       },
       behaviour = {
         auto_suggestions = false,
