@@ -834,7 +834,7 @@ return {
       provider = 'claude',
       auto_suggestions_provider = 'claude',
       openai = {
-        model = 'claude-3-5-haiku-20241022',
+        model = 'claude-3-5-sonnet-20241022',
       },
       behaviour = {
         auto_suggestions = false,
