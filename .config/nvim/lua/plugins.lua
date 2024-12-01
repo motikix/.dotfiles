@@ -809,6 +809,10 @@ return {
       'MunifTanjim/nui.nvim',
       'nvim-tree/nvim-web-devicons',
       {
+        'zbirenbaum/copilot.lua',
+        config = true,
+      },
+      {
         'HakonHarnes/img-clip.nvim',
         event = 'VeryLazy',
         opts = {
@@ -831,13 +835,13 @@ return {
       },
     },
     opts = {
-      provider = 'claude',
-      auto_suggestions_provider = 'claude',
-      openai = {
-        model = 'claude-3-5-sonnet-20241022',
+      provider = 'copilot',
+      auto_suggestions_provider = 'copilot',
+      copilot = {
+        model = 'claude-3.5-sonnet',
       },
       behaviour = {
-        auto_suggestions = false,
+        auto_suggestions = true,
       },
       windows = {
         ask = {
