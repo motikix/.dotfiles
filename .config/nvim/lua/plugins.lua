@@ -839,7 +839,7 @@ return {
       provider = 'copilot',
       auto_suggestions_provider = 'copilot',
       copilot = {
-        model = 'claude-3.5-sonnet',
+        model = 'gpt-4o',
       },
       behaviour = {
         auto_suggestions = true,
@@ -937,9 +937,9 @@ return {
     end,
   },
   {
-    "olrtg/nvim-emmet",
+    'olrtg/nvim-emmet',
     config = function()
-      vim.keymap.set({ "n", "v" }, '<leader>xe', require('nvim-emmet').wrap_with_abbreviation)
+      vim.keymap.set({ 'n', 'v' }, '<leader>xe', require('nvim-emmet').wrap_with_abbreviation)
     end,
   },
 
