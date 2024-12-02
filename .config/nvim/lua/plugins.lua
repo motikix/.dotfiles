@@ -810,6 +810,7 @@ return {
       'nvim-tree/nvim-web-devicons',
       {
         'zbirenbaum/copilot.lua',
+        event = 'VeryLazy',
         config = true,
       },
       {
