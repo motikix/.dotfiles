@@ -110,6 +110,14 @@ M.setup = function()
     on_attach = M.on_attach,
     capabilities = capabilities,
   })
+  lsp.biome.setup({
+    on_attach = M.on_attach,
+    capabilities = capabilities,
+  })
+  lsp.cssls.setup({
+    on_attach = M.on_attach,
+    capabilities = capabilities,
+  })
   lsp.tailwindcss.setup({
     on_attach = M.on_attach,
     capabilities = capabilities,

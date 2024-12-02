@@ -11,12 +11,8 @@ M.setup = function()
       nls.builtins.formatting.goimports,
       -- gleam
       nls.builtins.formatting.gleam_format,
-      -- javascript, typescript, jsx, tsx, vue
-      require('none-ls.diagnostics.eslint'),
-      nls.builtins.formatting.prettier,
-      -- css,sass,scss,less
-      nls.builtins.diagnostics.stylelint,
-      nls.builtins.formatting.stylelint,
+      -- web
+      nls.builtins.formatting.biome,
       -- dart
       nls.builtins.formatting.dart_format,
       -- lua
