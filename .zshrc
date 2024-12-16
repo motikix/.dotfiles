@@ -89,10 +89,9 @@ bindkey "^d" _do_nothing
 #                               setup                                #
 #--------------------------------------------------------------------#
 
-if [[ -d $HOME/.asdf ]]; then
-  . $HOME/.asdf/asdf.sh
-  fpath=($ASDF_DIR/completions $fpath)
-fi
+_exists_cmd mise && {
+  eval "$(~/.local/bin/mise activate zsh)"
+}
 
 _exists_cmd zoxide && {
   export _ZO_FZF_OPTS=($FZF_DEFAULT_OPTS "--preview '$FZF_PREVIEW_DIR_CMD {2..}'")
