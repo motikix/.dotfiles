@@ -1,4 +1,7 @@
 ### Personal ###
+# mise
+mise.local.toml
+
 # asdf
 .tool-versions
 
