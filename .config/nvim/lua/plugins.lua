@@ -839,7 +839,7 @@ return {
       provider = 'copilot',
       auto_suggestions_provider = 'copilot',
       copilot = {
-        model = 'gpt-4o',
+        model = 'claude-3.5-sonnet',
       },
       behaviour = {
         auto_suggestions = true,
