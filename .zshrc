@@ -37,7 +37,7 @@ export FZF_DEFAULT_OPTS="\
   --height 40% --layout=reverse --border --bind ctrl-u:preview-up,ctrl-d:preview-down \
   --color=bg+:-1,bg:-1,spinner:#f5e0dc,hl:#f38ba8 \
   --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
-  --color=marker:#b4befe,fg+:#cdd6f4:underline,prompt:#cba6f7,hl+:#f38ba8 \
+  --color=marker:#b4befe,fg+:#f2cdcd,prompt:#cba6f7,hl+:#f38ba8 \
   --color=selected-bg:#45475a \
   --multi"
 export FZF_CTRL_T_OPTS="--preview '$FZF_PREVIEW_FILE_CMD {}'"
