@@ -15,11 +15,11 @@ return {
     end,
     config = function()
       require('catppuccin').setup({
-        transparent_background = false,
+        transparent_background = true,
         show_end_of_buffer = false,
         term_colors = true,
         dim_inactive = {
-          enabled = true,
+          enabled = false,
         },
         styles = {
           comments = { 'italic' },
@@ -58,6 +58,9 @@ return {
         },
       })
       vim.cmd([[colorscheme catppuccin]])
+      -- Show current line
+      vim.api.nvim_set_hl(0, 'CursorLine', { underline = true })
+      vim.wo.cursorline = true
     end,
   },
 
@@ -183,7 +186,6 @@ return {
               return true
             end
           end,
-          separator_style = 'slant',
         },
       })
     end,
@@ -580,12 +582,10 @@ return {
       size = 20,
       open_mapping = [[<C-\>]],
       hide_numbers = true,
-      shade_terminals = true,
-      shade_filetypes = { 'none' },
+      shade_terminals = false,
       direction = 'float',
       float_opts = {
         border = 'curved',
-        winblend = 10,
       },
       winbar = {
         enabled = true,

@@ -35,9 +35,6 @@ vim.o.shortmess = vim.o.shortmess .. 'I'
 vim.wo.number = true
 vim.wo.relativenumber = true
 
--- Show current line
-vim.wo.cursorline = true
-
 -- One character ahead of the end of the line
 vim.o.virtualedit = 'onemore'
 
@@ -146,6 +143,8 @@ vim.g.python3_host_prog = vim.fn.exepath('/usr/bin/python3')
 
 -- Colors
 vim.o.termguicolors = true
+vim.o.winblend = 0
+vim.o.pumblend = 0
 
 -- Terminal
 vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', opts)

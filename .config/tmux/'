@@ -28,7 +28,7 @@ set -g status-left ""
 set -g status-right "#{E:@catppuccin_status_directory}"
 set -ag status-right "#{E:@catppuccin_status_user}"
 set -ag status-right "#{E:@catppuccin_status_date_time}"
-set -ogq @thm_bg "default"
+set -ogq @thm_mantle "#ffffff"
 
 # -- genaral -------------------------------------------------------------------
 
