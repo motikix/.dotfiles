@@ -6,6 +6,7 @@ return {
   font_size = 16,
   harfbuzz_features = { 'calt=0' },
   color_scheme = 'Catppuccin Mocha',
+  window_background_opacity = 0.75,
   enable_tab_bar = false,
   window_padding = {
     top = 0,
