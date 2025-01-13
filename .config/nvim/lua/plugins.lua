@@ -837,12 +837,12 @@ return {
     },
     opts = {
       provider = 'copilot',
-      auto_suggestions_provider = 'copilot',
+      auto_suggestions_provider = 'claude',
       copilot = {
         model = 'claude-3.5-sonnet',
       },
       behaviour = {
-        auto_suggestions = true,
+        auto_suggestions = false,
       },
       windows = {
         ask = {
