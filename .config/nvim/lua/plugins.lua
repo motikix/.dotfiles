@@ -32,7 +32,6 @@ return {
           dropbar = {
             enabled = true,
           },
-          hop = true,
           lsp_trouble = true,
           native_lsp = {
             enabled = true,
@@ -403,41 +402,6 @@ return {
         enable = true,
       },
     },
-  },
-  {
-    'phaazon/hop.nvim',
-    branch = 'v2',
-    init = function()
-      vim.api.nvim_set_keymap('n', 's', ':HopChar2<CR>', opts)
-      vim.api.nvim_set_keymap('n', 'S', ':HopChar2MW<CR>', opts)
-      -- use `<Cmd>lua` instead of `:lua`
-      -- https://github.com/phaazon/hop.nvim/issues/89#issuecomment-854701856
-      vim.api.nvim_set_keymap(
-        '',
-        'f',
-        '<Cmd>lua require("hop").hint_char1({ direction = require("hop.hint").HintDirection.AFTER_CURSOR, current_line_only = true })<CR>',
-        opts
-      )
-      vim.api.nvim_set_keymap(
-        '',
-        'F',
-        '<Cmd>lua require("hop").hint_char1({ direction = require("hop.hint").HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>',
-        opts
-      )
-      vim.api.nvim_set_keymap(
-        '',
-        't',
-        '<Cmd>lua require("hop").hint_char1({ direction = require("hop.hint").HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<CR>',
-        opts
-      )
-      vim.api.nvim_set_keymap(
-        '',
-        'T',
-        '<Cmd>lua require("hop").hint_char1({ direction = require("hop.hint").HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>',
-        opts
-      )
-    end,
-    config = true,
   },
   {
     'numToStr/Comment.nvim',
