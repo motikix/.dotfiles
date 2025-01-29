@@ -29,6 +29,7 @@ return {
           types = { 'italic' },
         },
         integrations = {
+          blink_cmp = true,
           dropbar = {
             enabled = true,
           },
@@ -54,6 +55,9 @@ return {
           noice = true,
           nvim_surround = true,
           render_markdown = true,
+          telescope = {
+            enabled = true,
+          },
         },
       })
       vim.cmd([[colorscheme catppuccin]])
@@ -649,117 +653,106 @@ return {
 
   -- Completion
   {
-    'L3MON4D3/LuaSnip',
-    dependencies = { 'rafamadriz/friendly-snippets' },
-    config = function()
-      require('luasnip.loaders.from_vscode').lazy_load()
-    end,
+    'saghen/blink.compat',
+    version = '*',
+    lazy = true,
   },
   {
-    'hrsh7th/nvim-cmp',
-    dependencies = {
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-path',
-      'hrsh7th/cmp-vsnip',
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-emoji',
-      'hrsh7th/cmp-cmdline',
-      'ray-x/cmp-treesitter',
-      'onsails/lspkind-nvim',
-      'L3MON4D3/LuaSnip',
-      'saadparwaiz1/cmp_luasnip',
-    },
-    config = function()
-      vim.o.completeopt = 'menu,menuone,noselect'
-      local cmp = require('cmp')
-      if cmp == nil then
-        return
-      end
-      local types = require('cmp.types')
-      local lspkind = require('lspkind')
-      local luasnip = require('luasnip')
-      cmp.setup({
-        snippet = {
-          expand = function(args)
-            luasnip.lsp_expand(args.body)
-          end,
+    'saghen/blink.cmp',
+    dependencies = { { 'L3MON4D3/LuaSnip', version = 'v2.*' }, 'fang2hou/blink-copilot' },
+    version = '*',
+    opts = {
+      keymap = {
+        preset = 'enter',
+      },
+      snippets = { preset = 'luasnip' },
+      signature = { enabled = true },
+      completion = {
+        documentation = { auto_show = true, auto_show_delay_ms = 0 },
+        ghost_text = { enabled = true },
+        accept = { auto_brackets = { enabled = false } },
+        list = {
+          selection = {
+            preselect = false,
+            auto_insert = true,
+          },
+          cycle = {
+            from_bottom = true,
+            from_top = true,
+          },
         },
-        mapping = cmp.mapping.preset.insert({
-          ['<C-n>'] = {
-            i = cmp.mapping.select_next_item({ behavior = types.cmp.SelectBehavior.Select }),
-          },
-          ['<C-p>'] = {
-            i = cmp.mapping.select_prev_item({ behavior = types.cmp.SelectBehavior.Select }),
-          },
-          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-          ['<C-f>'] = cmp.mapping.scroll_docs(4),
-          ['<C-Space>'] = cmp.mapping.complete(),
-          ['<C-e>'] = cmp.mapping.abort(),
-          ['<CR>'] = cmp.mapping.confirm({ select = false }),
-          ['<Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item({ behavior = types.cmp.SelectBehavior.Select })
-            elseif luasnip.locally_jumpable(1) then
-              luasnip.jump(1)
-            else
-              fallback()
-            end
-          end, { 'i', 's' }),
-          ['<S-Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item({ behavior = types.cmp.SelectBehavior.Select })
-            elseif luasnip.locally_jumpable(-1) then
-              luasnip.jump(-1)
-            else
-              fallback()
-            end
-          end, { 'i', 's' }),
-        }),
-        sources = cmp.config.sources({
-          { name = 'luasnip' },
-          { name = 'nvim_lsp' },
-          { name = 'treesitter' },
-          { name = 'orgmode' },
-          { name = 'emoji' },
-          { name = 'path' },
-        }, {
-          { name = 'buffer' },
-        }),
-        formatting = {
-          format = lspkind.cmp_format({
-            mode = 'symbol_text',
-            maxwidth = {
-              menu = 50,
-              abbr = 50,
+      },
+      appearance = {
+        use_nvim_cmp_as_default = true,
+        nerd_font_variant = 'mono',
+        kind_icons = {
+          Copilot = '',
+        },
+      },
+      sources = {
+        -- default = {
+        --   'copilot',
+        --   'lsp',
+        --   'path',
+        --   'snippets',
+        --   'buffer',
+        -- },
+        default = { 'avante_commands', 'avante_mentions', 'avante_files' },
+        per_filetype = {
+          org = { 'orgmode' },
+        },
+        providers = {
+          copilot = {
+            name = 'copilot',
+            module = 'blink-copilot',
+            score_offset = 100,
+            async = true,
+            opts = {
+              max_completions = 3,
+              max_attempts = 4,
             },
-            ellipsis_char = '...',
-            show_labelDetails = true,
-            before = function(entry, item)
-              item.kind = string.format('%s %s', cmp_kinds[item.kind], item.kind)
-              item.menu = ''
-              return item
-            end,
-          }),
+          },
+          orgmode = {
+            name = 'Orgmode',
+            module = 'orgmode.org.autocompletion.blink',
+            fallbacks = { 'buffer' },
+          },
+          avante_commands = {
+            name = 'avante_commands',
+            module = 'blink.compat.source',
+            score_offset = 90,
+            opts = {},
+          },
+          avante_files = {
+            name = 'avante_commands',
+            module = 'blink.compat.source',
+            score_offset = 100,
+            opts = {},
+          },
+          avante_mentions = {
+            name = 'avante_mentions',
+            module = 'blink.compat.source',
+            score_offset = 1000,
+            opts = {},
+          },
         },
-      })
-      cmp.setup.cmdline({ '/', '?' }, {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = {
-          { name = 'buffer' },
-        },
-      })
-      cmp.setup.cmdline(':', {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = cmp.config.sources({
-          { name = 'path' },
-        }, {
-          { name = 'cmdline' },
-        }),
-      })
-    end,
+      },
+    },
+    opts_extend = { 'sources.default' },
   },
 
   -- Generative AI
+  {
+    'zbirenbaum/copilot.lua',
+    opts = {
+      suggestion = { enabled = false },
+      panel = { enabled = false },
+    },
+  },
+  {
+    'zbirenbaum/copilot-cmp',
+    config = true,
+  },
   {
     'yetone/avante.nvim',
     event = 'VeryLazy',
@@ -767,16 +760,11 @@ return {
     version = false,
     build = 'make',
     dependencies = {
-      'nvim-treesitter/nvim-treesitter',
       'stevearc/dressing.nvim',
       'nvim-lua/plenary.nvim',
       'MunifTanjim/nui.nvim',
+      'nvim-telescope/telescope.nvim',
       'nvim-tree/nvim-web-devicons',
-      {
-        'zbirenbaum/copilot.lua',
-        event = 'VeryLazy',
-        config = true,
-      },
       {
         'HakonHarnes/img-clip.nvim',
         event = 'VeryLazy',
@@ -791,17 +779,9 @@ return {
           },
         },
       },
-      {
-        'MeanderingProgrammer/render-markdown.nvim',
-        opts = {
-          file_types = { 'markdown', 'Avante' },
-        },
-        ft = { 'markdown', 'Avante' },
-      },
     },
     opts = {
       provider = 'copilot',
-      auto_suggestions_provider = 'claude',
       copilot = {
         model = 'claude-3.5-sonnet',
       },
@@ -809,9 +789,15 @@ return {
         auto_suggestions = false,
       },
       windows = {
-        ask = {
-          start_insert = false,
+        edit = {
+          start_insert = true,
         },
+        ask = {
+          start_insert = true,
+        },
+      },
+      file_selector = {
+        provider = 'native',
       },
     },
   },
@@ -819,40 +805,10 @@ return {
   -- Syntax Highlight / Language Support
   {
     'MeanderingProgrammer/render-markdown.nvim',
-    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
     opts = {
-      file_types = { 'markdown', 'codecompanion' },
+      file_types = { 'markdown', 'Avante' },
     },
-    ft = { 'markdown', 'codecompanion' },
-  },
-  { 'dhruvasagar/vim-table-mode' },
-  {
-    'linux-cultist/venv-selector.nvim',
-    dependencies = {
-      'neovim/nvim-lspconfig',
-      'mfussenegger/nvim-dap',
-      'mfussenegger/nvim-dap-python',
-      { 'nvim-telescope/telescope.nvim', branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' } },
-    },
-    lazy = false,
-    branch = 'regexp',
-    config = function()
-      require('venv-selector').setup()
-    end,
-    keys = {
-      { ',v', '<cmd>VenvSelect<cr>' },
-    },
-  },
-  {
-    'https://github.com/apple/pkl-neovim',
-    lazy = true,
-    event = 'BufReadPre *.pkl',
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter',
-    },
-    build = function()
-      vim.cmd('TSInstall! pkl')
-    end,
+    ft = { 'markdown', 'Avante' },
   },
   {
     'nvim-orgmode/orgmode',
@@ -890,6 +846,36 @@ return {
           fat_headlines = false,
         },
       })
+    end,
+  },
+
+  { 'dhruvasagar/vim-table-mode' },
+  {
+    'linux-cultist/venv-selector.nvim',
+    dependencies = {
+      'neovim/nvim-lspconfig',
+      'mfussenegger/nvim-dap',
+      'mfussenegger/nvim-dap-python',
+      { 'nvim-telescope/telescope.nvim', branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' } },
+    },
+    lazy = false,
+    branch = 'regexp',
+    config = function()
+      require('venv-selector').setup()
+    end,
+    keys = {
+      { ',v', '<cmd>VenvSelect<cr>' },
+    },
+  },
+  {
+    'https://github.com/apple/pkl-neovim',
+    lazy = true,
+    event = 'BufReadPre *.pkl',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+    },
+    build = function()
+      vim.cmd('TSInstall! pkl')
     end,
   },
   {
