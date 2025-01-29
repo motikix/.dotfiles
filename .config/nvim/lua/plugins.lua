@@ -89,6 +89,9 @@ return {
           ['vim.lsp.util.stylize_markdown'] = true,
           ['cmp.entry.get_documentation'] = true,
         },
+        signature = {
+          enabled = false,
+        },
       },
       presets = {
         bottom_search = false,
@@ -659,14 +662,19 @@ return {
   },
   {
     'saghen/blink.cmp',
-    dependencies = { { 'L3MON4D3/LuaSnip', version = 'v2.*' }, 'fang2hou/blink-copilot' },
+    dependencies = { 'rafamadriz/friendly-snippets', 'fang2hou/blink-copilot' },
     version = '*',
     opts = {
       keymap = {
         preset = 'enter',
       },
-      snippets = { preset = 'luasnip' },
-      signature = { enabled = true },
+      snippets = { preset = 'default' },
+      signature = {
+        enabled = true,
+        window = {
+          show_documentation = false,
+        },
+      },
       completion = {
         documentation = { auto_show = true, auto_show_delay_ms = 0 },
         ghost_text = { enabled = true },
@@ -690,14 +698,16 @@ return {
         },
       },
       sources = {
-        -- default = {
-        --   'copilot',
-        --   'lsp',
-        --   'path',
-        --   'snippets',
-        --   'buffer',
-        -- },
-        default = { 'avante_commands', 'avante_mentions', 'avante_files' },
+        default = {
+          'copilot',
+          'lsp',
+          'path',
+          'snippets',
+          'buffer',
+          'avante_commands',
+          'avante_mentions',
+          'avante_files',
+        },
         per_filetype = {
           org = { 'orgmode' },
         },
