@@ -59,7 +59,7 @@ M.on_attach = function(client, bufnr)
     })
   end
 
-  if client.name == 'ccls' then
+  if client.name == 'clangd' then
     -- use clang-format configured by `nonels.lua`
     client.server_capabilities.documentFormatting = false
     client.server_capabilities.documentRangeFormatting = false
@@ -71,14 +71,9 @@ M.setup = function()
 
   -- lsp providers
 
-  lsp.ccls.setup({
+  lsp.clangd.setup({
     on_attach = M.on_attach,
     capabilities = capabilities,
-    init_options = {
-      cache = {
-        directory = '/tmp/ccls',
-      },
-    },
   })
   lsp.gopls.setup({
     on_attach = M.on_attach,
