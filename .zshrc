@@ -123,9 +123,23 @@ _exists_cmd eza && {
   alias ll='eza --icons -l --header --git --git-repos --time-style=long-iso'
   alias tree='eza --icons -l -T --header --git --git-repos --time-style=long-iso -I=.git'
 }
-_exists_cmd bat && alias cat='bat'
+_exists_cmd bat && {
+  alias cat='bat'
+}
 _exists_cmd zoxide && {
   alias z='__zoxide_zi "$@"'
+}
+_exists_cmd pbcopy && {
+  alias c='pbcopy'
+  alias p='pbpaste'
+}
+_exists_cmd xsel && {
+  alias c='xsel -bi'
+  alias p='xsel'
+}
+_exists_cmd win32yank.exe && {
+  alias c='win32yank.exe -i --crlf'
+  alias p='win32yank.exe -o --lf'
 }
 
 #--------------------------------------------------------------------#
