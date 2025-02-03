@@ -87,6 +87,8 @@ function _do_nothing() {}
 zle -N _do_nothing
 bindkey "^d" _do_nothing
 
+function gi() { curl -sLw "\n" https://www.toptal.com/developers/gitignore/api/$@ ;}
+
 #--------------------------------------------------------------------#
 #                               setup                                #
 #--------------------------------------------------------------------#
