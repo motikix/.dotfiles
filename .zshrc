@@ -135,7 +135,7 @@ _exists_cmd pbcopy && {
 }
 _exists_cmd xsel && {
   alias c='xsel -bi'
-  alias p='xsel'
+  alias p='xsel -bo'
 }
 _exists_cmd win32yank.exe && {
   alias c='win32yank.exe -i --crlf'
