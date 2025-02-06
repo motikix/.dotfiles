@@ -682,7 +682,7 @@ return {
         list = {
           selection = {
             preselect = false,
-            auto_insert = true,
+            auto_insert = false,
           },
           cycle = {
             from_bottom = true,
@@ -922,7 +922,7 @@ return {
     keys = {
       { '<Leader>ha', ':HurlRunnerAt<CR>' },
       { '<Leader>hA', ':HurlRunner<CR>' },
-      { '<Leader>hh', ':HurlRunner<CR>',  mode = 'v' },
+      { '<Leader>hh', ':HurlRunner<CR>', mode = 'v' },
     },
   },
 
