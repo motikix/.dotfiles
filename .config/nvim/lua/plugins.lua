@@ -793,7 +793,7 @@ return {
     opts = {
       provider = 'copilot',
       copilot = {
-        model = 'claude-3.5-sonnet',
+        model = 'o3-mini',
       },
       behaviour = {
         auto_suggestions = false,
