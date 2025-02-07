@@ -130,16 +130,13 @@ _exists_cmd zoxide && {
   alias z='__zoxide_zi "$@"'
 }
 _exists_cmd pbcopy && {
-  alias c='pbcopy'
-  alias p='pbpaste'
+  alias clip='pbcopy'
 }
 _exists_cmd xsel && {
-  alias c='xsel -bi'
-  alias p='xsel -bo'
+  alias clip='xsel -bi'
 }
 _exists_cmd win32yank.exe && {
-  alias c='win32yank.exe -i --crlf'
-  alias p='win32yank.exe -o --lf'
+  alias clip='win32yank.exe -i --crlf'
 }
 
 #--------------------------------------------------------------------#
