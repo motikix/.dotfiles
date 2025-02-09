@@ -58,12 +58,6 @@ M.on_attach = function(client, bufnr)
       end,
     })
   end
-
-  if client.name == 'clangd' then
-    -- use clang-format configured by `nonels.lua`
-    client.server_capabilities.documentFormatting = false
-    client.server_capabilities.documentRangeFormatting = false
-  end
 end
 
 M.setup = function()

@@ -4,8 +4,6 @@ M.setup = function()
   local nls = require('null-ls')
   nls.setup({
     sources = {
-      -- c/c++
-      nls.builtins.formatting.clang_format,
       -- go
       nls.builtins.diagnostics.staticcheck,
       nls.builtins.formatting.goimports,
