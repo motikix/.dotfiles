@@ -51,6 +51,10 @@ M.on_attach = function(client, bufnr)
       callback = function()
         vim.lsp.buf.format({
           filter = function()
+            print(client.name)
+            if client.name == 'clangd' then
+              return false
+            end
             return M.format_enabled
           end,
           bufnr = bufnr,
