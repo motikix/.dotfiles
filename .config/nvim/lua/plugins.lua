@@ -1,7 +1,6 @@
 local opts = require('config').opts
 local opts_silent = require('config').opts_silent
 local sign = require('config').sign
-local cmp_kinds = require('config').cmp_kinds
 
 return {
   -- Color
@@ -922,7 +921,7 @@ return {
     keys = {
       { '<Leader>ha', ':HurlRunnerAt<CR>' },
       { '<Leader>hA', ':HurlRunner<CR>' },
-      { '<Leader>hh', ':HurlRunner<CR>', mode = 'v' },
+      { '<Leader>hh', ':HurlRunner<CR>',  mode = 'v' },
     },
   },
 
