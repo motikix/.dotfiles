@@ -28,6 +28,7 @@ treesitter.setup({
   },
   yati = {
     enable = true,
+    disable = { 'c', 'cpp' },
   },
   matchup = {
     enable = true,
