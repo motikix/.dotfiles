@@ -1,0 +1,7 @@
+font-family = monospace
+font-size = 16
+font-feature = -calt
+background-opacity = 0.75
+background-blur = true
+theme = catppuccin-mocha.conf
+window-decoration = server
