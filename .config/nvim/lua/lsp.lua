@@ -72,6 +72,7 @@ M.setup = function()
   lsp.clangd.setup({
     on_attach = M.on_attach,
     capabilities = capabilities,
+    cmd = { 'clangd', '--enable-config' },
   })
   lsp.gopls.setup({
     on_attach = M.on_attach,

@@ -1,0 +1,12 @@
+{
+  "clangd": {
+    "prefix": "clangd-c++23",
+    "body": [
+      "CompileFlags:",
+      "  Add:",
+      "    - -xc++",
+      "    - -Wall",
+      "    - -std=c++23"
+    ]
+  }
+}
