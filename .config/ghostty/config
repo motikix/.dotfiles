@@ -1,6 +1,7 @@
 font-family = monospace
 font-size = 16
 font-feature = -calt
+adjust-cell-height = 40%
 background-opacity = 0.75
 background-blur = true
 theme = catppuccin-mocha.conf
