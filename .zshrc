@@ -138,6 +138,7 @@ _exists_cmd xsel && {
 _exists_cmd win32yank.exe && {
   alias clip='win32yank.exe -i --crlf'
 }
+alias g++="g++ -std=c++23 -Wall"
 
 #--------------------------------------------------------------------#
 #                            zsh options                             #
