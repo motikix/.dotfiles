@@ -237,7 +237,10 @@ return {
   },
 
   -- Fuzzy Finder
-  { 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release' },
+  {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release',
+  },
   {
     'nvim-telescope/telescope.nvim',
     dependencies = {
@@ -786,7 +789,7 @@ return {
     opts = {
       provider = 'copilot',
       copilot = {
-        model = 'o3-mini',
+        model = 'claude-3.7-sonnet',
       },
       behaviour = {
         auto_suggestions = false,
@@ -796,7 +799,7 @@ return {
           start_insert = true,
         },
         ask = {
-          start_insert = true,
+          start_insert = false,
         },
       },
       file_selector = {
