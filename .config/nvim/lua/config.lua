@@ -42,6 +42,10 @@ M.cmp_kinds = {
   Event = ' ',
   Operator = '󰆕 ',
   TypeParameter = '󰅲 ',
+  TypeBuiltin = '󰅨 ',
+  Comment = '󰏺 ',
+  KeywordType = '󰌋 ',
+  KeywordImport = '󰌋 ',
   Codeium = ' ',
   Copilot = ' ',
 }
