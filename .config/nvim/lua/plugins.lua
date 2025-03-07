@@ -1,6 +1,7 @@
 local opts = require('config').opts
 local opts_silent = require('config').opts_silent
 local sign = require('config').sign
+local cmp_kinds = require('config').cmp_kinds
 
 return {
   -- Color
@@ -28,7 +29,7 @@ return {
           types = { 'italic' },
         },
         integrations = {
-          blink_cmp = true,
+          cmp = true,
           dropbar = {
             enabled = true,
           },
@@ -190,6 +191,7 @@ return {
             if vim.bo[buf_number].filetype ~= 'qf' then
               return true
             end
+            return false
           end,
         },
       })
@@ -652,99 +654,115 @@ return {
 
   -- Completion
   {
-    'saghen/blink.compat',
-    version = '*',
-    lazy = true,
+    'L3MON4D3/LuaSnip',
+    dependencies = { 'rafamadriz/friendly-snippets' },
+    config = function()
+      require('luasnip.loaders.from_vscode').lazy_load({ paths = './snippets' })
+    end,
   },
   {
-    'saghen/blink.cmp',
-    dependencies = { 'rafamadriz/friendly-snippets', 'fang2hou/blink-copilot' },
-    version = '*',
-    opts = {
-      keymap = {
-        preset = 'enter',
-      },
-      snippets = { preset = 'default' },
-      signature = {
-        enabled = true,
-        window = {
-          show_documentation = false,
-        },
-      },
-      completion = {
-        documentation = { auto_show = true, auto_show_delay_ms = 0 },
-        ghost_text = { enabled = true },
-        accept = { auto_brackets = { enabled = false } },
-        list = {
-          selection = {
-            preselect = false,
-            auto_insert = false,
-          },
-          cycle = {
-            from_bottom = true,
-            from_top = true,
-          },
-        },
-      },
-      appearance = {
-        use_nvim_cmp_as_default = true,
-        nerd_font_variant = 'mono',
-        kind_icons = {
-          Copilot = '',
-        },
-      },
-      sources = {
-        default = {
-          'copilot',
-          'lsp',
-          'path',
-          'snippets',
-          'buffer',
-          'avante_commands',
-          'avante_mentions',
-          'avante_files',
-        },
-        per_filetype = {
-          org = { 'orgmode' },
-        },
-        providers = {
-          copilot = {
-            name = 'copilot',
-            module = 'blink-copilot',
-            score_offset = 100,
-            async = true,
-            opts = {
-              max_completions = 3,
-              max_attempts = 4,
-            },
-          },
-          orgmode = {
-            name = 'Orgmode',
-            module = 'orgmode.org.autocompletion.blink',
-            fallbacks = { 'buffer' },
-          },
-          avante_commands = {
-            name = 'avante_commands',
-            module = 'blink.compat.source',
-            score_offset = 90,
-            opts = {},
-          },
-          avante_files = {
-            name = 'avante_files',
-            module = 'blink.compat.source',
-            score_offset = 100,
-            opts = {},
-          },
-          avante_mentions = {
-            name = 'avante_mentions',
-            module = 'blink.compat.source',
-            score_offset = 1000,
-            opts = {},
-          },
-        },
-      },
+    'hrsh7th/nvim-cmp',
+    dependencies = {
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-vsnip',
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-emoji',
+      'hrsh7th/cmp-cmdline',
+      'ray-x/cmp-treesitter',
+      'onsails/lspkind-nvim',
+      'L3MON4D3/LuaSnip',
+      'saadparwaiz1/cmp_luasnip',
     },
-    opts_extend = { 'sources.default' },
+    config = function()
+      vim.o.completeopt = 'menu,menuone,noselect'
+      local cmp = require('cmp')
+      if cmp == nil then
+        return
+      end
+      local types = require('cmp.types')
+      local lspkind = require('lspkind')
+      local luasnip = require('luasnip')
+      cmp.setup({
+        snippet = {
+          expand = function(args)
+            luasnip.lsp_expand(args.body)
+          end,
+        },
+        mapping = cmp.mapping.preset.insert({
+          ['<C-n>'] = {
+            i = cmp.mapping.select_next_item({ behavior = types.cmp.SelectBehavior.Select }),
+          },
+          ['<C-p>'] = {
+            i = cmp.mapping.select_prev_item({ behavior = types.cmp.SelectBehavior.Select }),
+          },
+          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+          ['<C-f>'] = cmp.mapping.scroll_docs(4),
+          ['<C-Space>'] = cmp.mapping.complete(),
+          ['<C-e>'] = cmp.mapping.abort(),
+          ['<CR>'] = cmp.mapping.confirm({ select = false }),
+          ['<Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item({ behavior = types.cmp.SelectBehavior.Select })
+            elseif luasnip.locally_jumpable(1) then
+              luasnip.jump(1)
+            else
+              fallback()
+            end
+          end, { 'i', 's' }),
+          ['<S-Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item({ behavior = types.cmp.SelectBehavior.Select })
+            elseif luasnip.locally_jumpable(-1) then
+              luasnip.jump(-1)
+            else
+              fallback()
+            end
+          end, { 'i', 's' }),
+        }),
+        sources = cmp.config.sources({
+          { name = 'copilot' },
+          { name = 'nvim_lsp' },
+          { name = 'treesitter' },
+          { name = 'luasnip' },
+          { name = 'emoji' },
+          { name = 'path' },
+          { name = 'orgmode' },
+        }, {
+          { name = 'buffer' },
+        }),
+        formatting = {
+          format = lspkind.cmp_format({
+            mode = 'symbol_text',
+            maxwidth = {
+              menu = 50,
+              abbr = 50,
+            },
+            ellipsis_char = '...',
+            show_labelDetails = true,
+            before = function(_, item)
+              item.kind = string.format('%s %s', cmp_kinds[item.kind], item.kind)
+              item.menu = ''
+              return item
+            end,
+          }),
+        },
+      })
+      cmp.setup.cmdline({ '/', '?' }, {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          { name = 'buffer' },
+        },
+      })
+      cmp.setup.cmdline(':', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = 'path' },
+        }, {
+          { name = 'cmdline' },
+        }),
+      })
+    end,
   },
 
   -- Generative AI

@@ -65,7 +65,7 @@ M.on_attach = function(client, bufnr)
 end
 
 M.setup = function()
-  local capabilities = require('blink.cmp').get_lsp_capabilities()
+  local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
   -- lsp providers
 
