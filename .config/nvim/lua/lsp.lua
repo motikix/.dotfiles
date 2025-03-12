@@ -12,6 +12,7 @@ M.on_attach = function(client, bufnr)
   end
 
   buf_set_keymap('n', 'K', ':lua vim.lsp.buf.hover()<Cr>', opts)
+  buf_set_keymap('i', '<C-s>', '<C-o>:lua vim.lsp.buf.signature_help()<Cr>', opts)
   buf_set_keymap('n', '<Leader>la', '<Cmd>lua vim.lsp.buf.code_action()<Cr>', opts)
   buf_set_keymap('n', '<Leader>lf', '<Cmd>lua vim.lsp.buf.format()<Cr>', opts)
 
@@ -241,10 +242,10 @@ M.setup = function()
   -- UI
 
   vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
-    border = 'single',
+    border = nil,
   })
   vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-    border = 'single',
+    border = nil,
   })
 end
 
