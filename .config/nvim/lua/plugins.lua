@@ -633,14 +633,16 @@ return {
     },
   },
   {
-    'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
-    init = function()
-      vim.diagnostic.config({
-        virtual_text = false,
-        virtual_lines = { only_current_line = true },
+    'rachartier/tiny-inline-diagnostic.nvim',
+    event = 'VeryLazy',
+    priority = 1000,
+    config = function()
+      require('tiny-inline-diagnostic').setup({
+        preset = 'modern',
+        transparent_bg = true,
       })
+      vim.diagnostic.config({ virtual_text = false })
     end,
-    config = true,
   },
   {
     'smjonas/inc-rename.nvim',
