@@ -297,11 +297,6 @@ return {
       vim.api.nvim_set_keymap('n', '<Leader>fh', ':Telescope help_tags theme=get_dropdown<CR>', opts)
       vim.api.nvim_set_keymap('n', '<Leader>fc', ':Telescope command_history theme=get_dropdown<CR>', opts)
       vim.api.nvim_set_keymap('n', '<Leader>fs', ':Telescope search_history theme=get_dropdown<CR>', opts)
-      -- lsp
-      vim.api.nvim_set_keymap('n', 'gd', ':Telescope lsp_definitions theme=get_dropdown<CR>', opts)
-      vim.api.nvim_set_keymap('n', 'gr', ':Telescope lsp_references theme=get_dropdown<CR>', opts)
-      vim.api.nvim_set_keymap('n', 'gy', ':Telescope lsp_type_definitions theme=get_dropdown<CR>', opts)
-      vim.api.nvim_set_keymap('n', 'gi', ':Telescope lsp_implementations theme=get_dropdown<CR>', opts)
       -- tree sitter
       vim.api.nvim_set_keymap('n', '<Leader>ts', ':Telescope treesitter theme=get_dropdown<CR>', opts)
     end,

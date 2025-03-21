@@ -11,6 +11,10 @@ M.on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, ...)
   end
 
+  buf_set_keymap('n', 'gd', ':lua vim.lsp.buf.definition()<Cr>', opts)
+  buf_set_keymap('n', 'gr', ':lua vim.lsp.buf.references()<Cr>', opts)
+  buf_set_keymap('n', 'gy', ':lua vim.lsp.buf.type_definition()<Cr>', opts)
+  buf_set_keymap('n', 'gi', ':lua vim.lsp.buf.implementation()<Cr>', opts)
   buf_set_keymap('n', 'K', ':lua vim.lsp.buf.hover()<Cr>', opts)
   buf_set_keymap('i', '<C-s>', '<C-o>:lua vim.lsp.buf.signature_help()<Cr>', opts)
   buf_set_keymap('n', '<Leader>la', '<Cmd>lua vim.lsp.buf.code_action()<Cr>', opts)
