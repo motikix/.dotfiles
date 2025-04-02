@@ -566,11 +566,6 @@ return {
     dependencies = {
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
-      'jay-babu/mason-null-ls.nvim',
-      {
-        'nvimtools/none-ls.nvim',
-        dependencies = { 'nvim-lua/plenary.nvim', 'nvimtools/none-ls-extras.nvim' },
-      },
       'folke/neodev.nvim',
       'b0o/schemastore.nvim',
     },
@@ -584,10 +579,6 @@ return {
         log_level = vim.log.levels.INFO,
       })
       require('mason-lspconfig').setup({
-        automatic_installation = true,
-      })
-      require('nonels').setup()
-      require('mason-null-ls').setup({
         automatic_installation = true,
       })
       require('neodev').setup()
@@ -758,6 +749,74 @@ return {
         }, {
           { name = 'cmdline' },
         }),
+      })
+    end,
+  },
+
+  -- Linter / Formatter
+  {
+    'stevearc/conform.nvim',
+    opts = {
+      formatters_by_ft = {
+        lua = { 'stylua' },
+        go = { 'goimports' },
+        rust = { 'rustfmt' },
+        gleam = { 'gleam' },
+        python = { 'ruff_fix', 'ruff_format', 'ruff_organize_imports' },
+        javascript = { 'biome' },
+        javascriptreact = { 'biome' },
+        typescript = { 'biome' },
+        typescriptreact = { 'biome' },
+        html = { 'prettier' },
+        css = { 'biome' },
+        json = { 'biome' },
+        jsonc = { 'biome' },
+        terraform = { 'terraform_fmt' },
+      },
+      format_on_save = function(bufnr)
+        if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+          return
+        end
+        return { timeout_ms = 500, lsp_format = 'fallback' }
+      end,
+    },
+    init = function()
+      vim.api.nvim_create_user_command('ToggleFormat', function(args)
+        if args.bang then
+          -- FormatDisable! と同等 (buffer local)
+          vim.b.disable_autoformat = not vim.b.disable_autoformat
+          print(vim.b.disable_autoformat and 'Buffer autoformat disabled' or 'Buffer autoformat enabled')
+        else
+          -- FormatDisable/FormatEnable と同等 (global)
+          vim.g.disable_autoformat = not vim.g.disable_autoformat
+          print(vim.g.disable_autoformat and 'Global autoformat disabled' or 'Global autoformat enabled')
+        end
+      end, {
+        desc = 'Toggle autoformat-on-save (with bang for buffer local)',
+        bang = true,
+      })
+      local opts = { noremap = true, silent = true }
+      vim.api.nvim_set_keymap('n', '<Leader>tf', ':ToggleFormat<CR>', opts)
+      vim.api.nvim_set_keymap('n', '<Leader>tF', ':ToggleFormat!<CR>', opts)
+    end,
+  },
+  {
+    'mfussenegger/nvim-lint',
+    config = function()
+      require('lint').linters_by_ft = {
+        python = { 'ruff' },
+        javascript = { 'biomejs' },
+        javascriptreact = { 'biomejs' },
+        typescript = { 'biomejs' },
+        typescriptreact = { 'biomejs' },
+        css = { 'biomejs' },
+        json = { 'biomejs' },
+        jsonc = { 'biomejs' },
+      }
+      vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
+        callback = function()
+          require('lint').try_lint()
+        end,
       })
     end,
   },

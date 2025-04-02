@@ -3,8 +3,6 @@ local M = {}
 local opts = require('config').opts
 local lsp = require('lspconfig')
 
-M.format_enabled = true
-
 local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
 M.on_attach = function(client, bufnr)
   local function buf_set_keymap(...)
@@ -43,12 +41,6 @@ M.on_attach = function(client, bufnr)
 
   -- format on save
   if client.supports_method('textDocument/formatting') then
-    -- toggle formatting
-    vim.api.nvim_create_user_command('ToggleFormatting', function()
-      M.format_enabled = not M.format_enabled
-      vim.notify(string.format('ToggleFormatting: %s', M.format_enabled))
-    end, {})
-    vim.api.nvim_set_keymap('n', '<Leader>tf', ':ToggleFormatting<CR>', opts)
     vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
     vim.api.nvim_create_autocmd('BufWritePre', {
       group = augroup,
@@ -56,11 +48,10 @@ M.on_attach = function(client, bufnr)
       callback = function()
         vim.lsp.buf.format({
           filter = function()
-            print(client.name)
             if client.name == 'clangd' then
               return false
             end
-            return M.format_enabled
+            return true
           end,
           bufnr = bufnr,
         })
@@ -119,10 +110,6 @@ M.setup = function()
     on_attach = M.on_attach,
     capabilities = capabilities,
   })
-  lsp.biome.setup({
-    on_attach = M.on_attach,
-    capabilities = capabilities,
-  })
   lsp.cssls.setup({
     on_attach = M.on_attach,
     capabilities = capabilities,
@@ -154,22 +141,6 @@ M.setup = function()
       },
     },
   })
-  lsp.dartls.setup({
-    on_attach = M.on_attach,
-    capabilities = capabilities,
-  })
-  lsp.vuels.setup({
-    on_attach = M.on_attach,
-    capabilities = capabilities,
-  })
-  lsp.svelte.setup({
-    on_attach = M.on_attach,
-    capabilities = capabilities,
-  })
-  lsp.astro.setup({
-    on_attach = M.on_attach,
-    capabilities = capabilities,
-  })
   lsp.pyright.setup({
     on_attach = M.on_attach,
     capabilities = capabilities,
@@ -178,10 +149,6 @@ M.setup = function()
         disableOrganizeImports = true,
       },
     },
-  })
-  lsp.ruff.setup({
-    on_attach = M.on_attach,
-    capabilities = capabilities,
   })
   lsp.lua_ls.setup({
     on_attach = M.on_attach,
@@ -227,6 +194,9 @@ M.setup = function()
         schemas = require('schemastore').json.schemas(),
         validate = { enable = true },
       },
+    },
+    init_options = {
+      provideFormatter = false,
     },
   })
   lsp.yamlls.setup({
