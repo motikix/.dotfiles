@@ -4,6 +4,12 @@ local sign = require('config').sign
 local cmp_kinds = require('config').cmp_kinds
 
 return {
+  -- Package Manager
+  {
+    'williamboman/mason.nvim',
+    config = true,
+  },
+
   -- Color
   {
     'catppuccin/nvim',
@@ -207,17 +213,11 @@ return {
     },
     config = function()
       local ctp_feline = require('catppuccin.groups.integrations.feline')
+      ctp_feline.setup()
       require('feline').setup({
         components = ctp_feline.get(),
       })
     end,
-  },
-  {
-    'Bekaboo/dropbar.nvim',
-    init = function()
-      vim.api.nvim_set_keymap('n', '<Leader>ds', '<Cmd>lua require("dropbar.api").pick()<CR>', opts)
-    end,
-    config = true,
   },
 
   -- Treesitter
@@ -566,7 +566,6 @@ return {
     dependencies = {
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
-      'folke/neodev.nvim',
       'b0o/schemastore.nvim',
     },
     config = function()
@@ -575,13 +574,10 @@ return {
       pcall(vim.api.nvim_del_keymap, 'n', 'gra')
       pcall(vim.api.nvim_del_keymap, 'x', 'gra')
       pcall(vim.api.nvim_del_keymap, 'n', 'grn')
-      require('mason').setup({
-        log_level = vim.log.levels.INFO,
-      })
       require('mason-lspconfig').setup({
+        ensure_installed = {},
         automatic_installation = true,
       })
-      require('neodev').setup()
       require('lsp').setup()
       vim.diagnostic.config({
         signs = {
@@ -795,7 +791,6 @@ return {
         desc = 'Toggle autoformat-on-save (with bang for buffer local)',
         bang = true,
       })
-      local opts = { noremap = true, silent = true }
       vim.api.nvim_set_keymap('n', '<Leader>tf', ':ToggleFormat<CR>', opts)
       vim.api.nvim_set_keymap('n', '<Leader>tF', ':ToggleFormat!<CR>', opts)
     end,
@@ -940,12 +935,10 @@ return {
     },
     lazy = false,
     branch = 'regexp',
-    config = function()
-      require('venv-selector').setup()
-    end,
     keys = {
-      { ',v', '<cmd>VenvSelect<cr>' },
+      { ',v', ':VenvSelect<CR>' },
     },
+    config = true,
   },
   {
     'https://github.com/apple/pkl-neovim',
