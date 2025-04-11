@@ -822,6 +822,9 @@ return {
     opts = {
       suggestion = { enabled = false },
       panel = { enabled = false },
+      server = {
+        type = 'binary',
+      },
     },
   },
   {
