@@ -106,6 +106,11 @@ M.setup = function()
     root_dir = lsp.util.root_pattern('package.json'),
     single_file_support = false,
   })
+  lsp.denols.setup({
+    on_attach = M.on_attach,
+    capabilities = capabilities,
+    root_dir = lsp.util.root_pattern('deno.json', 'deno.jsonc'),
+  })
   lsp.emmet_language_server.setup({
     on_attach = M.on_attach,
     capabilities = capabilities,
@@ -121,25 +126,6 @@ M.setup = function()
   lsp.prismals.setup({
     on_attach = M.on_attach,
     capabilities = capabilities,
-  })
-  lsp.denols.setup({
-    on_attach = M.on_attach,
-    capabilities = capabilities,
-    root_dir = lsp.util.root_pattern('deno.json', 'deno.jsonc', 'deps.ts', 'import_map.json'),
-    init_options = {
-      enable = true,
-      lint = true,
-      unstable = true,
-      suggest = {
-        imports = {
-          hosts = {
-            ['https://deno.land'] = true,
-            ['https://cdn.nest.land'] = true,
-            ['https://crux.land'] = true,
-          },
-        },
-      },
-    },
   })
   lsp.pyright.setup({
     on_attach = M.on_attach,
