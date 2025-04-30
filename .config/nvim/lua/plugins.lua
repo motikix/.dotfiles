@@ -323,3 +323,44 @@ later(function()
   vim.api.nvim_set_keymap('n', '<Leader>hA', ':HurlRunner<CR>', opts)
   vim.api.nvim_set_keymap('v', '<Leader>hh', ':HurlRunner<CR>', opts)
 end)
+
+later(function()
+  add({
+    source = 'yetone/avante.nvim',
+    monitor = 'main',
+    depends = {
+      'nvim-treesitter/nvim-treesitter',
+      'stevearc/dressing.nvim',
+      'nvim-lua/plenary.nvim',
+      'MunifTanjim/nui.nvim',
+      'echasnovski/mini.icons',
+    },
+    hooks = {
+      post_checkout = function()
+        vim.cmd('make')
+      end,
+    },
+  })
+  add({ source = 'zbirenbaum/copilot.lua' })
+  require('copilot').setup()
+  require('avante').setup({
+    provider = 'copilot',
+    copilot = {
+      model = 'claude-3.7-sonnet',
+    },
+    behaviour = {
+      auto_suggestions = false,
+    },
+    windows = {
+      edit = {
+        start_insert = true,
+      },
+      ask = {
+        start_insert = false,
+      },
+    },
+    file_selector = {
+      provider = 'native',
+    },
+  })
+end)
