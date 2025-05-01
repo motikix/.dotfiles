@@ -62,7 +62,7 @@ vim.o.autoindent = true
 vim.o.smartindent = true
 
 -- Conceal
-vim.o.conceallevel = 0
+vim.o.conceallevel = 2
 vim.o.concealcursor = nil
 
 -- Clipboard
