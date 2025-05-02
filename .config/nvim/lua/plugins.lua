@@ -114,7 +114,7 @@ return {
     'stevearc/oil.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     init = function()
-      vim.api.nvim_set_keymap('n', '\\', ':Oil<CR>', opts)
+      vim.api.nvim_set_keymap('n', '-', ':Oil<CR>', opts)
     end,
     config = function()
       function _G.get_oil_winbar()
@@ -674,40 +674,14 @@ return {
           end,
         },
         mapping = cmp.mapping.preset.insert({
-          ['<C-n>'] = {
-            i = cmp.mapping.select_next_item({ behavior = types.cmp.SelectBehavior.Select }),
-          },
-          ['<C-p>'] = {
-            i = cmp.mapping.select_prev_item({ behavior = types.cmp.SelectBehavior.Select }),
-          },
           ['<C-b>'] = cmp.mapping.scroll_docs(-4),
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
           ['<C-Space>'] = cmp.mapping.complete(),
           ['<C-e>'] = cmp.mapping.abort(),
-          ['<CR>'] = cmp.mapping.confirm({ select = false }),
-          ['<Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item({ behavior = types.cmp.SelectBehavior.Select })
-            elseif luasnip.locally_jumpable(1) then
-              luasnip.jump(1)
-            else
-              fallback()
-            end
-          end, { 'i', 's' }),
-          ['<S-Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item({ behavior = types.cmp.SelectBehavior.Select })
-            elseif luasnip.locally_jumpable(-1) then
-              luasnip.jump(-1)
-            else
-              fallback()
-            end
-          end, { 'i', 's' }),
+          ['<CR>'] = cmp.mapping.confirm({ select = true }),
         }),
         sources = cmp.config.sources({
-          { name = 'copilot' },
           { name = 'nvim_lsp' },
-          { name = 'treesitter' },
           { name = 'luasnip' },
           { name = 'emoji' },
           { name = 'path' },
@@ -819,16 +793,8 @@ return {
   -- Generative AI
   {
     'zbirenbaum/copilot.lua',
-    opts = {
-      suggestion = { enabled = false },
-      panel = { enabled = false },
-      server = {
-        type = 'binary',
-      },
-    },
-  },
-  {
-    'zbirenbaum/copilot-cmp',
+    cmd = 'Copilot',
+    event = 'InsertEnter',
     config = true,
   },
   {
@@ -843,20 +809,6 @@ return {
       'MunifTanjim/nui.nvim',
       'nvim-telescope/telescope.nvim',
       'nvim-tree/nvim-web-devicons',
-      {
-        'HakonHarnes/img-clip.nvim',
-        event = 'VeryLazy',
-        opts = {
-          default = {
-            embed_image_as_base64 = false,
-            prompt_for_file_name = false,
-            drag_and_drop = {
-              insert_mode = true,
-            },
-            use_absolute_path = true,
-          },
-        },
-      },
     },
     opts = {
       provider = 'copilot',
