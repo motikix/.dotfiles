@@ -75,10 +75,6 @@ return {
 
   -- UI
   {
-    'stevearc/dressing.nvim',
-    config = true,
-  },
-  {
     'folke/noice.nvim',
     event = 'VeryLazy',
     dependencies = {
@@ -155,8 +151,6 @@ return {
     'famiu/bufdelete.nvim',
     cmd = { 'Bdelete', 'Bwipeout' },
     init = function()
-      vim.api.nvim_set_keymap('n', '<Leader>bd', ':bw<CR>', opts)
-      vim.api.nvim_set_keymap('n', '<Leader>bad', ':bufdo :bw<CR>', opts)
       vim.api.nvim_set_keymap('n', '<Leader>bD', ':Bwipeout<CR>', opts)
       vim.api.nvim_set_keymap('n', '<Leader>baD', ':bufdo :Bwipeout<CR>', opts)
     end,
@@ -294,11 +288,8 @@ return {
       )
       vim.api.nvim_set_keymap('n', '<Leader>fg', ':Telescope live_grep theme=get_dropdown<CR>', opts)
       vim.api.nvim_set_keymap('n', '<Leader>fb', ':Telescope buffers theme=get_dropdown<CR>', opts)
-      vim.api.nvim_set_keymap('n', '<Leader>fh', ':Telescope help_tags theme=get_dropdown<CR>', opts)
       vim.api.nvim_set_keymap('n', '<Leader>fc', ':Telescope command_history theme=get_dropdown<CR>', opts)
       vim.api.nvim_set_keymap('n', '<Leader>fs', ':Telescope search_history theme=get_dropdown<CR>', opts)
-      -- tree sitter
-      vim.api.nvim_set_keymap('n', '<Leader>ts', ':Telescope treesitter theme=get_dropdown<CR>', opts)
     end,
   },
 
@@ -306,7 +297,7 @@ return {
   {
     'lewis6991/gitsigns.nvim',
     init = function()
-      vim.api.nvim_set_keymap('n', '<Leader>gq', ':Gitsigns setqflist all<CR>', opts)
+      vim.api.nvim_set_keymap('n', '<Leader>tg', ':Gitsigns setqflist all<CR>', opts)
     end,
     opts = {
       trouble = true,
@@ -343,7 +334,7 @@ return {
 
         -- Actions
         map('n', '<Leader>gp', gs.preview_hunk)
-        map('n', '<Leader>gbp', function()
+        map('n', '<Leader>gb', function()
           gs.blame_line({ full = true })
         end)
       end,
@@ -352,7 +343,7 @@ return {
   {
     'FabijanZulj/blame.nvim',
     init = function()
-      vim.api.nvim_set_keymap('n', '<Leader>gbb', ':BlameToggle<CR>', opts)
+      vim.api.nvim_set_keymap('n', '<Leader>gB', ':BlameToggle<CR>', opts)
     end,
     config = true,
   },
@@ -424,7 +415,7 @@ return {
       'nvim-lua/plenary.nvim',
     },
     init = function()
-      vim.api.nvim_set_keymap('n', '<Leader>tc', ':TodoTrouble<CR>', opts)
+      vim.api.nvim_set_keymap('n', '<Leader>tt', ':TodoTrouble<CR>', opts)
     end,
     config = true,
   },
@@ -499,22 +490,8 @@ return {
     end,
   },
   {
-    'danymat/neogen',
-    dependencies = { 'nvim-treesitter/nvim-treesitter' },
-    init = function()
-      vim.api.nvim_set_keymap('n', '<Leader>nf', ':lua require("neogen").generate()<CR>', opts)
-    end,
-    config = true,
-  },
-  {
     'yaocccc/nvim-foldsign',
     config = true,
-  },
-  {
-    'chentoast/marks.nvim',
-    opts = {
-      default_mappings = true,
-    },
   },
   { 'AndrewRadev/linediff.vim' },
   {
@@ -835,50 +812,11 @@ return {
   -- Syntax Highlight / Language Support
   {
     'MeanderingProgrammer/render-markdown.nvim',
+    ft = { 'markdown', 'Avante' },
     opts = {
       file_types = { 'markdown', 'Avante' },
     },
-    ft = { 'markdown', 'Avante' },
   },
-  {
-    'nvim-orgmode/orgmode',
-    dependencies = {
-      { 'nvim-treesitter/nvim-treesitter' },
-    },
-    config = function()
-      require('orgmode').setup({
-        org_startup_indented = false,
-        org_adapt_indentation = false,
-        org_agenda_files = '~/.org/**/*',
-        org_default_notes_file = '~/.org/refile.org',
-      })
-    end,
-  },
-  {
-    'lukas-reineke/headlines.nvim',
-    dependencies = 'nvim-treesitter/nvim-treesitter',
-    config = function()
-      require('headlines').setup({
-        markdown = {
-          bullets = false,
-          fat_headlines = false,
-        },
-        rmd = {
-          bullets = false,
-          fat_headlines = false,
-        },
-        norg = {
-          bullets = false,
-          fat_headlines = false,
-        },
-        org = {
-          bullets = false,
-          fat_headlines = false,
-        },
-      })
-    end,
-  },
-
   { 'dhruvasagar/vim-table-mode' },
   {
     'linux-cultist/venv-selector.nvim',
@@ -894,25 +832,6 @@ return {
       { ',v', ':VenvSelect<CR>' },
     },
     config = true,
-  },
-  {
-    'https://github.com/apple/pkl-neovim',
-    lazy = true,
-    event = 'BufReadPre *.pkl',
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter',
-    },
-    build = function()
-      vim.cmd('TSInstall! pkl')
-    end,
-  },
-  {
-    'michaelb/sniprun',
-    branch = 'master',
-    build = 'sh install.sh',
-    config = function()
-      require('sniprun').setup()
-    end,
   },
   {
     'olrtg/nvim-emmet',
