@@ -92,7 +92,7 @@ return {
           ['cmp.entry.get_documentation'] = true,
         },
         signature = {
-          enabled = false,
+          enabled = true,
         },
       },
       presets = {
@@ -623,85 +623,30 @@ return {
     end,
   },
   {
-    'hrsh7th/nvim-cmp',
-    dependencies = {
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-path',
-      'hrsh7th/cmp-vsnip',
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-emoji',
-      'hrsh7th/cmp-cmdline',
-      'ray-x/cmp-treesitter',
-      'onsails/lspkind-nvim',
-      'L3MON4D3/LuaSnip',
-      'saadparwaiz1/cmp_luasnip',
+    'saghen/blink.cmp',
+    dependencies = { 'rafamadriz/friendly-snippets' },
+    version = '1.*',
+    opts = {
+      keymap = { preset = 'enter' },
+      sources = {
+        default = { 'lsp', 'path', 'snippets', 'buffer' },
+      },
+      fuzzy = { implementation = 'prefer_rust_with_warning' },
+      signature = { enabled = false },
+      completion = {
+        documentation = { auto_show = true },
+        menu = { auto_show = true },
+        list = { selection = { preselect = false, auto_insert = true } },
+      },
+      cmdline = {
+        keymap = { preset = 'enter' },
+        completion = {
+          menu = { auto_show = true },
+          list = { selection = { preselect = false, auto_insert = true } },
+        },
+      },
     },
-    config = function()
-      vim.o.completeopt = 'menu,menuone,noselect'
-      local cmp = require('cmp')
-      if cmp == nil then
-        return
-      end
-      local types = require('cmp.types')
-      local lspkind = require('lspkind')
-      local luasnip = require('luasnip')
-      cmp.setup({
-        snippet = {
-          expand = function(args)
-            luasnip.lsp_expand(args.body)
-          end,
-        },
-        mapping = cmp.mapping.preset.insert({
-          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-          ['<C-f>'] = cmp.mapping.scroll_docs(4),
-          ['<C-Space>'] = cmp.mapping.complete(),
-          ['<C-e>'] = cmp.mapping.abort(),
-          ['<CR>'] = cmp.mapping.confirm({ select = true }),
-        }),
-        sources = cmp.config.sources({
-          { name = 'nvim_lsp' },
-          { name = 'luasnip' },
-          { name = 'emoji' },
-          { name = 'path' },
-          { name = 'orgmode' },
-        }, {
-          { name = 'buffer' },
-        }),
-        formatting = {
-          format = lspkind.cmp_format({
-            mode = 'symbol_text',
-            maxwidth = {
-              menu = 50,
-              abbr = 50,
-            },
-            ellipsis_char = '...',
-            show_labelDetails = true,
-            before = function(_, item)
-              item.kind = string.format('%s %s', cmp_kinds[item.kind], item.kind)
-              item.menu = ''
-              return item
-            end,
-          }),
-        },
-      })
-      cmp.setup.cmdline({ '/', '?' }, {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = {
-          { name = 'buffer' },
-        },
-      })
-      cmp.setup.cmdline(':', {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = cmp.config.sources({
-          { name = 'path' },
-        }, {
-          { name = 'cmdline' },
-        }),
-      })
-      vim.lsp.config('*', {
-        capabilities = require('cmp_nvim_lsp').default_capabilities(),
-      })
-    end,
+    opts_extend = { 'sources.default' },
   },
 
   -- Linter / Formatter
