@@ -159,4 +159,22 @@ end, {})
 vim.api.nvim_set_keymap('n', 'yp', ':CopyPath<CR>', opts)
 vim.api.nvim_set_keymap('n', 'yP', ':CopyPath2<CR>', opts)
 
+-- Formatter
+vim.api.nvim_create_user_command('ToggleFormat', function(args)
+  if args.bang then
+    -- FormatDisable! と同等 (buffer local)
+    vim.b.disable_autoformat = not vim.b.disable_autoformat
+    print(vim.b.disable_autoformat and 'Buffer autoformat disabled' or 'Buffer autoformat enabled')
+  else
+    -- FormatDisable/FormatEnable と同等 (global)
+    vim.g.disable_autoformat = not vim.g.disable_autoformat
+    print(vim.g.disable_autoformat and 'Global autoformat disabled' or 'Global autoformat enabled')
+  end
+end, {
+  desc = 'Toggle autoformat-on-save (with bang for buffer local)',
+  bang = true,
+})
+vim.api.nvim_set_keymap('n', '<Leader>tf', ':ToggleFormat<CR>', opts)
+vim.api.nvim_set_keymap('n', '<Leader>tF', ':ToggleFormat!<CR>', opts)
+
 require('bootstrap')

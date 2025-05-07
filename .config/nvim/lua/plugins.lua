@@ -546,16 +546,23 @@ return {
       'b0o/schemastore.nvim',
     },
     config = function()
-      -- prevent some default mappings by this plugin
+      -- remap key mappings
       pcall(vim.api.nvim_del_keymap, 'n', 'grr')
       pcall(vim.api.nvim_del_keymap, 'n', 'gra')
       pcall(vim.api.nvim_del_keymap, 'x', 'gra')
       pcall(vim.api.nvim_del_keymap, 'n', 'grn')
+      vim.api.nvim_set_keymap('n', 'gd', ':lua vim.lsp.buf.definition()<Cr>', opts)
+      vim.api.nvim_set_keymap('n', 'gr', ':lua vim.lsp.buf.references()<Cr>', opts)
+      vim.api.nvim_set_keymap('n', 'gy', ':lua vim.lsp.buf.type_definition()<Cr>', opts)
+      vim.api.nvim_set_keymap('n', 'gi', ':lua vim.lsp.buf.implementation()<Cr>', opts)
+      vim.api.nvim_set_keymap('n', 'K', ':lua vim.lsp.buf.hover()<Cr>', opts)
+      vim.api.nvim_set_keymap('i', '<C-s>', '<C-o>:lua vim.lsp.buf.signature_help()<Cr>', opts)
+      vim.api.nvim_set_keymap('n', '<Leader>la', '<Cmd>lua vim.lsp.buf.code_action()<Cr>', opts)
+      vim.api.nvim_set_keymap('n', '<Leader>lf', '<Cmd>lua vim.lsp.buf.format()<Cr>', opts)
       require('mason-lspconfig').setup({
         ensure_installed = {},
         automatic_installation = true,
       })
-      require('lsp').setup()
       vim.diagnostic.config({
         signs = {
           text = {
@@ -570,11 +577,6 @@ return {
           },
         },
       })
-      local signs = { Error = sign.error, Warn = sign.warn, Hint = sign.hint, Info = sign.info }
-      for type, icon in pairs(signs) do
-        local hl = 'DiagnosticSign' .. type
-        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-      end
     end,
   },
   {
@@ -600,7 +602,6 @@ return {
         preset = 'modern',
         transparent_bg = true,
       })
-      vim.diagnostic.config({ virtual_text = false })
     end,
   },
   {
@@ -697,6 +698,9 @@ return {
           { name = 'cmdline' },
         }),
       })
+      vim.lsp.config('*', {
+        capabilities = require('cmp_nvim_lsp').default_capabilities(),
+      })
     end,
   },
 
@@ -727,24 +731,6 @@ return {
         return { timeout_ms = 500, lsp_format = 'fallback' }
       end,
     },
-    init = function()
-      vim.api.nvim_create_user_command('ToggleFormat', function(args)
-        if args.bang then
-          -- FormatDisable! と同等 (buffer local)
-          vim.b.disable_autoformat = not vim.b.disable_autoformat
-          print(vim.b.disable_autoformat and 'Buffer autoformat disabled' or 'Buffer autoformat enabled')
-        else
-          -- FormatDisable/FormatEnable と同等 (global)
-          vim.g.disable_autoformat = not vim.g.disable_autoformat
-          print(vim.g.disable_autoformat and 'Global autoformat disabled' or 'Global autoformat enabled')
-        end
-      end, {
-        desc = 'Toggle autoformat-on-save (with bang for buffer local)',
-        bang = true,
-      })
-      vim.api.nvim_set_keymap('n', '<Leader>tf', ':ToggleFormat<CR>', opts)
-      vim.api.nvim_set_keymap('n', '<Leader>tF', ':ToggleFormat!<CR>', opts)
-    end,
   },
   {
     'mfussenegger/nvim-lint',
@@ -815,6 +801,9 @@ return {
     ft = { 'markdown', 'Avante' },
     opts = {
       file_types = { 'markdown', 'Avante' },
+      code = {
+        border = 'thin',
+      },
     },
   },
   { 'dhruvasagar/vim-table-mode' },
@@ -859,7 +848,7 @@ return {
     keys = {
       { '<Leader>ha', ':HurlRunnerAt<CR>' },
       { '<Leader>hA', ':HurlRunner<CR>' },
-      { '<Leader>hh', ':HurlRunner<CR>',  mode = 'v' },
+      { '<Leader>hh', ':HurlRunner<CR>', mode = 'v' },
     },
   },
 
