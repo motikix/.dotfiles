@@ -548,13 +548,10 @@ return {
     config = function()
       -- remap key mappings
       pcall(vim.api.nvim_del_keymap, 'n', 'grr')
+      pcall(vim.api.nvim_del_keymap, 'n', 'gri')
       pcall(vim.api.nvim_del_keymap, 'n', 'gra')
       pcall(vim.api.nvim_del_keymap, 'x', 'gra')
       pcall(vim.api.nvim_del_keymap, 'n', 'grn')
-      vim.api.nvim_set_keymap('n', 'gd', ':lua vim.lsp.buf.definition()<Cr>', opts)
-      vim.api.nvim_set_keymap('n', 'gr', ':lua vim.lsp.buf.references()<Cr>', opts)
-      vim.api.nvim_set_keymap('n', 'gy', ':lua vim.lsp.buf.type_definition()<Cr>', opts)
-      vim.api.nvim_set_keymap('n', 'gi', ':lua vim.lsp.buf.implementation()<Cr>', opts)
       vim.api.nvim_set_keymap('n', 'K', ':lua vim.lsp.buf.hover()<Cr>', opts)
       vim.api.nvim_set_keymap('i', '<C-s>', '<C-o>:lua vim.lsp.buf.signature_help()<Cr>', opts)
       vim.api.nvim_set_keymap('n', '<Leader>la', '<Cmd>lua vim.lsp.buf.code_action()<Cr>', opts)
@@ -587,6 +584,11 @@ return {
       { '<Leader>tw', ':Trouble diagnostics toggle focus=1<CR>' },
       { '<Leader>tq', ':Trouble qflist toggle focus=1<CR>' },
       { '<Leader>tl', ':Trouble loclist toggle focus=1<CR>' },
+      { 'gd', ':Trouble lsp_definitions<CR>' },
+      { 'gr', ':Trouble lsp_references<CR>' },
+      { 'gy', ':Trouble lsp_type_definitions<CR>' },
+      { 'gi', ':Trouble lsp_implementations<CR>' },
+      { 'gs', ':Trouble lsp_document_symbols<CR>' },
     },
     opts = {
       auto_close = true,
