@@ -579,17 +579,18 @@ return {
   {
     'folke/trouble.nvim',
     cmd = 'Trouble',
-    keys = {
-      { '<Leader>td', ':Trouble diagnostics toggle filter.buf=0 focus=1<CR>' },
-      { '<Leader>tw', ':Trouble diagnostics toggle focus=1<CR>' },
-      { '<Leader>tq', ':Trouble qflist toggle focus=1<CR>' },
-      { '<Leader>tl', ':Trouble loclist toggle focus=1<CR>' },
-      { 'gd', ':Trouble lsp_definitions<CR>' },
-      { 'gr', ':Trouble lsp_references<CR>' },
-      { 'gy', ':Trouble lsp_type_definitions<CR>' },
-      { 'gi', ':Trouble lsp_implementations<CR>' },
-      { 'gs', ':Trouble lsp_document_symbols<CR>' },
-    },
+    init = function()
+      vim.api.nvim_set_keymap('n', '<Leader>td', ':Trouble diagnostics toggle filter.buf=0 focus=1<CR>', opts)
+      vim.api.nvim_set_keymap('n', '<Leader>tw', ':Trouble diagnostics toggle focus=1<CR>', opts)
+      vim.api.nvim_set_keymap('n', '<Leader>tq', ':Trouble qflist toggle focus=1<CR>', opts)
+      vim.api.nvim_set_keymap('n', '<Leader>tl', ':Trouble loclist toggle focus=1<CR>', opts)
+      vim.api.nvim_set_keymap('n', 'gd', ':Trouble lsp_definitions<CR>', opts)
+      vim.api.nvim_set_keymap('n', 'gr', ':Trouble lsp_references<CR>', opts)
+      vim.api.nvim_set_keymap('n', 'gy', ':Trouble lsp_type_definitions<CR>', opts)
+      vim.api.nvim_set_keymap('n', 'gi', ':Trouble lsp_implementations<CR>', opts)
+      vim.api.nvim_set_keymap('n', 'gs', ':Trouble lsp_document_symbols<CR>', opts)
+    end,
+    config = true,
     opts = {
       auto_close = true,
       focus = true,
@@ -753,7 +754,6 @@ return {
       },
     },
   },
-  { 'dhruvasagar/vim-table-mode' },
   {
     'linux-cultist/venv-selector.nvim',
     dependencies = {
@@ -768,12 +768,6 @@ return {
       { ',v', ':VenvSelect<CR>' },
     },
     config = true,
-  },
-  {
-    'olrtg/nvim-emmet',
-    config = function()
-      vim.keymap.set({ 'n', 'v' }, '<leader>xe', require('nvim-emmet').wrap_with_abbreviation)
-    end,
   },
 
   -- Rest Client
