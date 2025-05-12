@@ -23,9 +23,6 @@ export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
 export XDG_STATE_HOME=$HOME/.local/state
 
-# bin
-export PATH=$HOME/.local/bin:$PATH
-
 # gpg
 export GPG_TTY=$(tty)
 
@@ -43,8 +40,16 @@ export FZF_DEFAULT_OPTS="\
 export FZF_CTRL_T_OPTS="--preview '$FZF_PREVIEW_FILE_CMD {}'"
 export FZF_ALT_C_OPTS="--preview '$FZF_PREVIEW_DIR_CMD {}'"
 
-# miniserve
-export MINISERVE_INDEX=index.html
+# bin
+export PATH=$HOME/.local/bin:$PATH
+
+# pnpm
+export PNPM_HOME="$HOME/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+
 
 # go
 export GOPATH=$HOME/go
@@ -63,6 +68,9 @@ export PATH=$HOME/.dotnet/tools:$PATH
 
 # AWS
 export AWS_VAULT_BACKEND=pass
+
+# miniserve
+export MINISERVE_INDEX=index.html
 
 #--------------------------------------------------------------------#
 #                             functions                              #
