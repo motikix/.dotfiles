@@ -630,7 +630,10 @@ return {
     dependencies = { 'rafamadriz/friendly-snippets' },
     version = '1.*',
     opts = {
-      keymap = { preset = 'enter' },
+      keymap = {
+        preset = 'enter',
+        ['<CR>'] = { 'accept_and_enter', 'fallback' },
+      },
       sources = {
         default = { 'lsp', 'path', 'snippets', 'buffer' },
       },
@@ -642,7 +645,10 @@ return {
         list = { selection = { preselect = false, auto_insert = true } },
       },
       cmdline = {
-        keymap = { preset = 'enter' },
+        keymap = {
+          preset = 'enter',
+          ['<CR>'] = { 'accept_and_enter', 'fallback' },
+        },
         completion = {
           menu = { auto_show = true },
           list = { selection = { preselect = false, auto_insert = true } },
