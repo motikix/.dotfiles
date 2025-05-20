@@ -632,7 +632,6 @@ return {
     opts = {
       keymap = {
         preset = 'enter',
-        ['<CR>'] = { 'accept_and_enter', 'fallback' },
       },
       sources = {
         default = { 'lsp', 'path', 'snippets', 'buffer' },
@@ -646,8 +645,7 @@ return {
       },
       cmdline = {
         keymap = {
-          preset = 'enter',
-          ['<CR>'] = { 'accept_and_enter', 'fallback' },
+          preset = 'default',
         },
         completion = {
           menu = { auto_show = true },
