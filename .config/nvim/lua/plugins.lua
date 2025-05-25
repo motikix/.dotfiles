@@ -217,6 +217,9 @@ return {
   -- Treesitter
   {
     'nvim-treesitter/nvim-treesitter',
+    branch = 'master',
+    lazy = false,
+    build = ':TSUpdate',
     dependencies = {
       'yioneko/nvim-yati',
       'RRethy/nvim-treesitter-endwise',
