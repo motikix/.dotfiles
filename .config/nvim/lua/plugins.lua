@@ -730,8 +730,10 @@ return {
     },
     opts = {
       provider = 'copilot',
-      copilot = {
-        model = 'claude-3.7-sonnet',
+      providers = {
+        copilot = {
+          model = 'claude-3.7-sonnet',
+        },
       },
       behaviour = {
         auto_suggestions = false,
