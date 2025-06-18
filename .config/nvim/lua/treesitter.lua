@@ -4,7 +4,7 @@ treesitter.setup({
   ensure_installed = 'all',
   sync_install = false,
   auto_install = true,
-  ignore_install = { 'org' },
+  ignore_install = { 'ipkg' },
   modules = {},
   playground = {
     enable = true,
