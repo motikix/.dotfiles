@@ -708,50 +708,6 @@ return {
     end,
   },
 
-  -- Generative AI
-  {
-    'zbirenbaum/copilot.lua',
-    cmd = 'Copilot',
-    event = 'InsertEnter',
-    config = true,
-  },
-  {
-    'yetone/avante.nvim',
-    event = 'VeryLazy',
-    lazy = false,
-    version = false,
-    build = 'make',
-    dependencies = {
-      'stevearc/dressing.nvim',
-      'nvim-lua/plenary.nvim',
-      'MunifTanjim/nui.nvim',
-      'nvim-telescope/telescope.nvim',
-      'nvim-tree/nvim-web-devicons',
-    },
-    opts = {
-      provider = 'copilot',
-      providers = {
-        copilot = {
-          model = 'claude-3.7-sonnet',
-        },
-      },
-      behaviour = {
-        auto_suggestions = false,
-      },
-      windows = {
-        edit = {
-          start_insert = true,
-        },
-        ask = {
-          start_insert = false,
-        },
-      },
-      file_selector = {
-        provider = 'native',
-      },
-    },
-  },
-
   -- Syntax Highlight / Language Support
   {
     'MeanderingProgrammer/render-markdown.nvim',
