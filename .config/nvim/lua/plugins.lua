@@ -109,9 +109,7 @@ return {
   {
     'stevearc/oil.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
-    init = function()
-      vim.api.nvim_set_keymap('n', '-', ':Oil<CR>', opts)
-    end,
+    keys = { '-' },
     config = function()
       function _G.get_oil_winbar()
         local dir = require('oil').get_current_dir()
@@ -131,26 +129,28 @@ return {
           show_hidden = true,
         },
       })
+      vim.api.nvim_set_keymap('n', '-', ':Oil<CR>', opts)
     end,
   },
 
   -- Window
   {
     'yorickpeterse/nvim-window',
-    init = function()
+    keys = { '<Leader>w' },
+    config = function()
+      require('nvim-window').setup({
+        chars = { 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l' },
+      })
       vim.api.nvim_set_keymap('n', '<Leader>w', ':lua require("nvim-window").pick()<CR>', opts)
     end,
-    opts = {
-      chars = { 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l' },
-    },
   },
 
   -- Buffer
-  { 'tiagovla/scope.nvim' },
+  { 'tiagovla/scope.nvim', event = 'VeryLazy' },
   {
     'famiu/bufdelete.nvim',
-    cmd = { 'Bdelete', 'Bwipeout' },
-    init = function()
+    keys = { '<Leader>bD', '<Leader>baD' },
+    config = function()
       vim.api.nvim_set_keymap('n', '<Leader>bD', ':Bwipeout<CR>', opts)
       vim.api.nvim_set_keymap('n', '<Leader>baD', ':bufdo :Bwipeout<CR>', opts)
     end,
@@ -218,7 +218,7 @@ return {
   {
     'nvim-treesitter/nvim-treesitter',
     branch = 'master',
-    lazy = false,
+    event = { 'BufReadPost', 'BufNewFile' },
     build = ':TSUpdate',
     dependencies = {
       'yioneko/nvim-yati',
@@ -239,11 +239,20 @@ return {
   {
     'nvim-telescope/telescope-fzf-native.nvim',
     build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release',
+    lazy = true,
   },
   {
     'nvim-telescope/telescope.nvim',
     dependencies = {
       'nvim-lua/plenary.nvim',
+    },
+    keys = {
+      '<C-s>',
+      '<Leader>ff',
+      '<Leader>fg',
+      '<Leader>fb',
+      '<Leader>fc',
+      '<Leader>fs',
     },
     config = function()
       local telescope = require('telescope')
@@ -299,9 +308,7 @@ return {
   -- Git Support
   {
     'lewis6991/gitsigns.nvim',
-    init = function()
-      vim.api.nvim_set_keymap('n', '<Leader>tg', ':Gitsigns setqflist all<CR>', opts)
-    end,
+    event = { 'BufReadPost', 'BufNewFile' },
     opts = {
       trouble = true,
       current_line_blame = true,
@@ -340,18 +347,21 @@ return {
         map('n', '<Leader>gb', function()
           gs.blame_line({ full = true })
         end)
+        vim.api.nvim_set_keymap('n', '<Leader>tg', ':Gitsigns setqflist all<CR>', opts)
       end,
     },
   },
   {
     'FabijanZulj/blame.nvim',
-    init = function()
+    keys = { '<Leader>gB' },
+    config = function()
+      require('blame').setup()
       vim.api.nvim_set_keymap('n', '<Leader>gB', ':BlameToggle<CR>', opts)
     end,
-    config = true,
   },
   {
     'akinsho/git-conflict.nvim',
+    event = { 'BufReadPost', 'BufNewFile' },
     opts = {
       disable_diagnostics = true,
     },
@@ -417,13 +427,15 @@ return {
     dependencies = {
       'nvim-lua/plenary.nvim',
     },
-    init = function()
+    event = { 'BufReadPost', 'BufNewFile' },
+    config = function()
+      require('todo-comments').setup()
       vim.api.nvim_set_keymap('n', '<Leader>tt', ':TodoTrouble<CR>', opts)
     end,
-    config = true,
   },
   {
     'windwp/nvim-autopairs',
+    event = 'InsertEnter',
     opts = {
       disable_filetype = { 'TelescopePrompt', 'vim' },
       check_ts = true,
@@ -435,6 +447,7 @@ return {
   },
   {
     'windwp/nvim-ts-autotag',
+    event = 'InsertEnter',
     opts = {
       opts = {
         enable_close = true,
@@ -443,16 +456,17 @@ return {
       },
     },
   },
-  { 'gpanders/editorconfig.nvim' },
+  { 'gpanders/editorconfig.nvim', event = { 'BufReadPost', 'BufNewFile' } },
   {
     'kylechui/nvim-surround',
     version = '*',
     event = 'VeryLazy',
     config = true,
   },
-  { 'andymass/vim-matchup' },
+  { 'andymass/vim-matchup', event = { 'BufReadPost', 'BufNewFile' } },
   {
     'norcalli/nvim-colorizer.lua',
+    event = { 'BufReadPost', 'BufNewFile' },
     opts = { '*' },
   },
   {
@@ -522,22 +536,25 @@ return {
   -- Terminal
   {
     'akinsho/nvim-toggleterm.lua',
-    opts = {
-      size = 20,
-      open_mapping = [[<C-\>]],
-      hide_numbers = true,
-      shade_terminals = false,
-      direction = 'float',
-      float_opts = {
-        border = 'curved',
-      },
-      winbar = {
-        enabled = true,
-        name_formatter = function(term)
-          return term.name
-        end,
-      },
-    },
+    keys = { [[<C-\>]] },
+    config = function()
+      require('toggleterm').setup({
+        size = 20,
+        open_mapping = [[<C-\>]],
+        hide_numbers = true,
+        shade_terminals = false,
+        direction = 'float',
+        float_opts = {
+          border = 'curved',
+        },
+        winbar = {
+          enabled = true,
+          name_formatter = function(term)
+            return term.name
+          end,
+        },
+      })
+    end,
   },
 
   -- LSP
@@ -727,7 +744,7 @@ return {
       'mfussenegger/nvim-dap-python',
       { 'nvim-telescope/telescope.nvim', branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' } },
     },
-    lazy = false,
+    ft = 'python',
     branch = 'regexp',
     keys = {
       { ',v', ':VenvSelect<CR>' },
@@ -759,5 +776,5 @@ return {
   },
 
   -- Misc
-  { 'wsdjeg/vim-fetch' },
+  { 'wsdjeg/vim-fetch', lazy = false },
 }

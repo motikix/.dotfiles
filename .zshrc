@@ -72,6 +72,9 @@ export AWS_VAULT_BACKEND=pass
 # miniserve
 export MINISERVE_INDEX=index.html
 
+# turso
+export PATH=$HOME/.turso:$PATH
+
 #--------------------------------------------------------------------#
 #                             functions                              #
 #--------------------------------------------------------------------#
