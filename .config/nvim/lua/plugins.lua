@@ -6,7 +6,11 @@ local cmp_kinds = require('config').cmp_kinds
 return {
   -- Package Manager
   {
-    'williamboman/mason.nvim',
+    'mason-org/mason.nvim',
+    config = true,
+  },
+  {
+    'mason-org/mason-lspconfig.nvim',
     config = true,
   },
 
@@ -238,7 +242,7 @@ return {
   -- Fuzzy Finder
   {
     'nvim-telescope/telescope-fzf-native.nvim',
-    build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release',
+    build = 'make',
     lazy = true,
   },
   {
@@ -561,8 +565,6 @@ return {
   {
     'neovim/nvim-lspconfig',
     dependencies = {
-      'williamboman/mason.nvim',
-      'williamboman/mason-lspconfig.nvim',
       'b0o/schemastore.nvim',
     },
     config = function()
@@ -576,10 +578,6 @@ return {
       vim.api.nvim_set_keymap('i', '<C-s>', '<C-o>:lua vim.lsp.buf.signature_help()<Cr>', opts)
       vim.api.nvim_set_keymap('n', '<Leader>la', '<Cmd>lua vim.lsp.buf.code_action()<Cr>', opts)
       vim.api.nvim_set_keymap('n', '<Leader>lf', '<Cmd>lua vim.lsp.buf.format()<Cr>', opts)
-      require('mason-lspconfig').setup({
-        ensure_installed = {},
-        automatic_installation = true,
-      })
       vim.diagnostic.config({
         signs = {
           text = {

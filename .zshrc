@@ -1,6 +1,3 @@
-# Fig pre block. Keep at the top of this file.
-[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
-
 #--------------------------------------------------------------------#
 #                            environments                            #
 #--------------------------------------------------------------------#
@@ -103,10 +100,6 @@ function gi() { curl -sLw "\n" https://www.toptal.com/developers/gitignore/api/$
 #--------------------------------------------------------------------#
 #                               setup                                #
 #--------------------------------------------------------------------#
-
-_exists_cmd mise && {
-  eval "$(~/.local/bin/mise activate zsh)"
-}
 
 _exists_cmd zoxide && {
   export _ZO_FZF_OPTS=($FZF_DEFAULT_OPTS "--preview '$FZF_PREVIEW_DIR_CMD {2..}'")
@@ -237,6 +230,3 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# Fig post block. Keep at the bottom of this file.
-[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
