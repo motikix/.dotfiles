@@ -101,6 +101,10 @@ function gi() { curl -sLw "\n" https://www.toptal.com/developers/gitignore/api/$
 #                               setup                                #
 #--------------------------------------------------------------------#
 
+_exists_cmd mise && {
+  eval "$(mise activate zsh)"
+}
+
 _exists_cmd zoxide && {
   export _ZO_FZF_OPTS=($FZF_DEFAULT_OPTS "--preview '$FZF_PREVIEW_DIR_CMD {2..}'")
   eval "$(zoxide init zsh)"
