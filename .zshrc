@@ -1,153 +1,4 @@
 #--------------------------------------------------------------------#
-#                            environments                            #
-#--------------------------------------------------------------------#
-
-# zsh
-export HISTFILE=$HOME/.zsh_history
-export HISTSIZE=2000
-export SAVEHIST=1000
-export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
-compctl -M 'm:{a-z}={A-Z}'
-export fpath=(~/.local/share/zsh/completions ~/.local/share/zsh/site-functions $fpath)
-
-# lang
-export LANG=en_US.UTF-8
-
-# xdg
-export XDG_CONFIG_DIRS=/etc/xdg
-export XDG_CONFIG_HOME=$HOME/.config
-export XDG_CACHE_HOME=$HOME/.cache
-export XDG_DATA_HOME=$HOME/.local/share
-export XDG_STATE_HOME=$HOME/.local/state
-
-# gpg
-export GPG_TTY=$(tty)
-
-# fzf
-export FZF_PREVIEW_FILE_CMD='bat --color=always --style=numbers'
-export FZF_PREVIEW_DIR_CMD='eza -1 --color=always'
-export FZF_DEFAULT_COMMAND='fd --hidden --follow --exclude .git'
-export FZF_DEFAULT_OPTS="\
-  --height 40% --layout=reverse --border --bind ctrl-u:preview-up,ctrl-d:preview-down \
-  --color=bg+:-1,bg:-1,spinner:#f5e0dc,hl:#f38ba8 \
-  --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
-  --color=marker:#b4befe,fg+:#f2cdcd,prompt:#cba6f7,hl+:#f38ba8 \
-  --color=selected-bg:#45475a \
-  --multi"
-export FZF_CTRL_T_OPTS="--preview '$FZF_PREVIEW_FILE_CMD {}'"
-export FZF_ALT_C_OPTS="--preview '$FZF_PREVIEW_DIR_CMD {}'"
-
-# bin
-export PATH=$HOME/.local/bin:$PATH
-
-# pnpm
-export PNPM_HOME="$HOME/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-
-# go
-export GOPATH=$HOME/go
-export PATH=$GOPATH/bin:$PATH
-
-# rust
-export PATH=$HOME/.cargo/bin:$PATH
-
-# python
-export PYTHONDONTWRITEBYTECODE=1
-export PIPENV_VENV_IN_PROJECT=true
-export PIPENV_VERBOSITY=-1
-
-# dotnet
-export PATH=$HOME/.dotnet/tools:$PATH
-
-# AWS
-export AWS_VAULT_BACKEND=pass
-
-# miniserve
-export MINISERVE_INDEX=index.html
-
-# turso
-export PATH=$HOME/.turso:$PATH
-
-#--------------------------------------------------------------------#
-#                             functions                              #
-#--------------------------------------------------------------------#
-
-function _exists_cmd() { type "$1" > /dev/null 2>&1; }
-
-function _fzf_ghq() {
-  local q=$([[ -n $BUFFER ]] && echo $BUFFER || echo '')
-  local root=$(ghq root)
-  local repo=$(ghq list | fzf --query "$q" --preview "$FZF_PREVIEW_DIR_CMD $root/{}")
-  if [[ -n $repo ]] then
-    BUFFER="cd $root/$repo"
-    zle accept-line
-  fi
-  zle reset-prompt
-}
-zle -N _fzf_ghq
-bindkey "^g" _fzf_ghq
-
-function _do_nothing() {}
-zle -N _do_nothing
-bindkey "^d" _do_nothing
-
-function gi() { curl -sLw "\n" https://www.toptal.com/developers/gitignore/api/$@ ;}
-
-#--------------------------------------------------------------------#
-#                               setup                                #
-#--------------------------------------------------------------------#
-
-_exists_cmd mise && {
-  eval "$(mise activate zsh)"
-}
-
-_exists_cmd zoxide && {
-  export _ZO_FZF_OPTS=($FZF_DEFAULT_OPTS "--preview '$FZF_PREVIEW_DIR_CMD {2..}'")
-  eval "$(zoxide init zsh)"
-}
-
-_exists_cmd tmux && {
-  [[ -z $TMUX ]] && [[ -z $VSCODE_PID ]] && [[ -z $VSCODE_INJECTION ]] && exec tmux
-}
-
-_exists_cmd fzf && {
-  source <(fzf --zsh)
-}
-
-#--------------------------------------------------------------------#
-#                              aliases                               #
-#--------------------------------------------------------------------#
-
-_exists_cmd nvim && {
-  alias vim='nvim'
-  alias vi='nvim --noplugin -c "set nohlsearch" -c "set inccommand=" -c "highlight Normal ctermbg=none guibg=none"'
-}
-_exists_cmd eza && {
-  alias ls='eza --icons'
-  alias ll='eza --icons -l --header --git --git-repos --time-style=long-iso'
-  alias tree='eza --icons -l -T --header --git --git-repos --time-style=long-iso -I=.git'
-}
-_exists_cmd bat && {
-  alias cat='bat'
-}
-_exists_cmd zoxide && {
-  alias z='__zoxide_zi "$@"'
-}
-_exists_cmd pbcopy && {
-  alias clip='pbcopy'
-}
-_exists_cmd xsel && {
-  alias clip='xsel -bi'
-}
-_exists_cmd win32yank.exe && {
-  alias clip='win32yank.exe -i --crlf'
-}
-alias g++="g++ -std=c++23 -Wall"
-
-#--------------------------------------------------------------------#
 #                            zsh options                             #
 #--------------------------------------------------------------------#
 
@@ -233,3 +84,75 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+#--------------------------------------------------------------------#
+#                             functions                              #
+#--------------------------------------------------------------------#
+
+function _exists_cmd() { type "$1" > /dev/null 2>&1; }
+
+function _fzf_ghq() {
+  local q=$([[ -n $BUFFER ]] && echo $BUFFER || echo '')
+  local root=$(ghq root)
+  local repo=$(ghq list | fzf --query "$q" --preview "$FZF_PREVIEW_DIR_CMD $root/{}")
+  if [[ -n $repo ]] then
+    BUFFER="cd $root/$repo"
+    zle accept-line
+  fi
+  zle reset-prompt
+}
+zle -N _fzf_ghq
+bindkey "^g" _fzf_ghq
+
+function _do_nothing() {}
+zle -N _do_nothing
+bindkey "^d" _do_nothing
+
+function gi() { curl -sLw "\n" https://www.toptal.com/developers/gitignore/api/$@ ;}
+
+#--------------------------------------------------------------------#
+#                              aliases                               #
+#--------------------------------------------------------------------#
+
+_exists_cmd nvim && {
+  alias vim='nvim'
+  alias vi='nvim --noplugin -c "set nohlsearch" -c "set inccommand=" -c "highlight Normal ctermbg=none guibg=none"'
+}
+_exists_cmd eza && {
+  alias ls='eza --icons'
+  alias ll='eza --icons -l --header --git --git-repos --time-style=long-iso'
+  alias tree='eza --icons -l -T --header --git --git-repos --time-style=long-iso -I=.git'
+}
+_exists_cmd bat && {
+  alias cat='bat'
+}
+_exists_cmd zoxide && {
+  alias z='__zoxide_zi "$@"'
+}
+_exists_cmd pbcopy && {
+  alias clip='pbcopy'
+}
+_exists_cmd xsel && {
+  alias clip='xsel -bi'
+}
+_exists_cmd win32yank.exe && {
+  alias clip='win32yank.exe -i --crlf'
+}
+alias g++="g++ -std=c++23 -Wall"
+
+#--------------------------------------------------------------------#
+#                               setup                                #
+#--------------------------------------------------------------------#
+
+_exists_cmd fzf && {
+  source <(fzf --zsh)
+}
+
+_exists_cmd zoxide && {
+  export _ZO_FZF_OPTS=($FZF_DEFAULT_OPTS "--preview '$FZF_PREVIEW_DIR_CMD {2..}'")
+  eval "$(zoxide init zsh)"
+}
+
+_exists_cmd mise && {
+  eval "$(mise activate zsh)"
+}
