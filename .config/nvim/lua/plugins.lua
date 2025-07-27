@@ -1,7 +1,6 @@
 local opts = require('config').opts
 local opts_silent = require('config').opts_silent
 local sign = require('config').sign
-local cmp_kinds = require('config').cmp_kinds
 
 return {
   -- Package Manager
@@ -39,11 +38,12 @@ return {
           types = { 'italic' },
         },
         integrations = {
-          cmp = true,
-          dropbar = {
-            enabled = true,
+          blink_cmp = {
+            style = 'bordered',
           },
+          gitsigns = true,
           lsp_trouble = true,
+          mason = true,
           native_lsp = {
             enabled = true,
             virtual_text = {
@@ -51,12 +51,14 @@ return {
               hints = { 'italic' },
               warnings = { 'italic' },
               information = { 'italic' },
+              ok = { 'italic' },
             },
             underlines = {
               errors = { 'undercurl' },
               hints = { 'undercurl' },
               warnings = { 'undercurl' },
               information = { 'undercurl' },
+              ok = { 'undercurl' },
             },
             inlay_hints = {
               background = true,
@@ -65,9 +67,12 @@ return {
           noice = true,
           nvim_surround = true,
           render_markdown = true,
+          semantic_tokens = true,
           telescope = {
             enabled = true,
           },
+          treesitter = true,
+          treesitter_context = true,
         },
       })
       vim.cmd([[colorscheme catppuccin]])
@@ -150,7 +155,7 @@ return {
   },
 
   -- Buffer
-  { 'tiagovla/scope.nvim', event = 'VeryLazy' },
+  { 'tiagovla/scope.nvim',        event = 'VeryLazy' },
   {
     'famiu/bufdelete.nvim',
     keys = { '<Leader>bD', '<Leader>baD' },
@@ -467,7 +472,7 @@ return {
     event = 'VeryLazy',
     config = true,
   },
-  { 'andymass/vim-matchup', event = { 'BufReadPost', 'BufNewFile' } },
+  { 'andymass/vim-matchup',    event = { 'BufReadPost', 'BufNewFile' } },
   {
     'norcalli/nvim-colorizer.lua',
     event = { 'BufReadPost', 'BufNewFile' },
@@ -769,7 +774,7 @@ return {
     keys = {
       { '<Leader>ha', ':HurlRunnerAt<CR>' },
       { '<Leader>hA', ':HurlRunner<CR>' },
-      { '<Leader>hh', ':HurlRunner<CR>', mode = 'v' },
+      { '<Leader>hh', ':HurlRunner<CR>',  mode = 'v' },
     },
   },
 
