@@ -1,0 +1,11 @@
+[Unit]
+Description=Mount rshared for rootless containers
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/mount --make-rshared /
+TimeoutSec=30s
+
+[Install]
+WantedBy=multi-user.target

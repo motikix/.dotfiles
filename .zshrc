@@ -111,6 +111,23 @@ bindkey "^d" _do_nothing
 function gi() { curl -sLw "\n" https://www.toptal.com/developers/gitignore/api/$@ ;}
 
 #--------------------------------------------------------------------#
+#                               setup                                #
+#--------------------------------------------------------------------#
+
+_exists_cmd devbox && {
+  eval "$(devbox global shellenv)"
+}
+
+_exists_cmd fzf && {
+  source <(fzf --zsh)
+}
+
+_exists_cmd zoxide && {
+  export _ZO_FZF_OPTS=($FZF_DEFAULT_OPTS "--preview '$FZF_PREVIEW_DIR_CMD {2..}'")
+  eval "$(zoxide init zsh)"
+}
+
+#--------------------------------------------------------------------#
 #                              aliases                               #
 #--------------------------------------------------------------------#
 
@@ -139,20 +156,3 @@ _exists_cmd win32yank.exe && {
   alias clip='win32yank.exe -i --crlf'
 }
 alias g++="g++ -std=c++23 -Wall"
-
-#--------------------------------------------------------------------#
-#                               setup                                #
-#--------------------------------------------------------------------#
-
-_exists_cmd fzf && {
-  source <(fzf --zsh)
-}
-
-_exists_cmd zoxide && {
-  export _ZO_FZF_OPTS=($FZF_DEFAULT_OPTS "--preview '$FZF_PREVIEW_DIR_CMD {2..}'")
-  eval "$(zoxide init zsh)"
-}
-
-_exists_cmd mise && {
-  eval "$(mise activate zsh)"
-}
