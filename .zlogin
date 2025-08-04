@@ -2,8 +2,8 @@
 #                               tmux                                 #
 #--------------------------------------------------------------------#
 
-_exists_cmd tmux && {
+if command -v tmux > /dev/null 2>&1; then
   if [[ -z "$TMUX" ]] && [[ -z "$VSCODE_PID" ]] && [[ -z "$VSCODE_INJECTION" ]]; then
     tmux && exit
   fi
-}
+fi

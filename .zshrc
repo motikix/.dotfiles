@@ -114,45 +114,45 @@ function gi() { curl -sLw "\n" https://www.toptal.com/developers/gitignore/api/$
 #                               setup                                #
 #--------------------------------------------------------------------#
 
-_exists_cmd devbox && {
+if command -v devbox > /dev/null 2>&1; then
   eval "$(devbox global shellenv)"
-}
+fi
 
-_exists_cmd fzf && {
+if command -v fzf > /dev/null 2>&1; then
   source <(fzf --zsh)
-}
+fi
 
-_exists_cmd zoxide && {
+if command -v zoxide > /dev/null 2>&1; then
   export _ZO_FZF_OPTS=($FZF_DEFAULT_OPTS "--preview '$FZF_PREVIEW_DIR_CMD {2..}'")
   eval "$(zoxide init zsh)"
-}
+fi
 
 #--------------------------------------------------------------------#
 #                              aliases                               #
 #--------------------------------------------------------------------#
 
-_exists_cmd nvim && {
+if command -v nvim > /dev/null 2>&1; then
   alias vim='nvim'
   alias vi='nvim --noplugin -c "set nohlsearch" -c "set inccommand=" -c "highlight Normal ctermbg=none guibg=none"'
-}
-_exists_cmd eza && {
+fi
+if command -v eza > /dev/null 2>&1; then
   alias ls='eza --icons'
   alias ll='eza --icons -l --header --git --git-repos --time-style=long-iso'
   alias tree='eza --icons -l -T --header --git --git-repos --time-style=long-iso -I=.git'
-}
-_exists_cmd bat && {
+fi
+if command -v bat > /dev/null 2>&1; then
   alias cat='bat'
-}
-_exists_cmd zoxide && {
+fi
+if command -v zoxide > /dev/null 2>&1; then
   alias z='__zoxide_zi "$@"'
-}
-_exists_cmd pbcopy && {
+fi
+if command -v pbcopy > /dev/null 2>&1; then
   alias clip='pbcopy'
-}
-_exists_cmd xsel && {
+fi
+if command -v xsel > /dev/null 2>&1; then
   alias clip='xsel -bi'
-}
-_exists_cmd win32yank.exe && {
+fi
+if command -v win32yank.exe > /dev/null 2>&1; then
   alias clip='win32yank.exe -i --crlf'
-}
+fi
 alias g++="g++ -std=c++23 -Wall"
