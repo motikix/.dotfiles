@@ -152,6 +152,9 @@ fi
 if command -v xsel > /dev/null 2>&1; then
   alias clip='xsel -bi'
 fi
+if command -v cursor-agent > /dev/null 2>&1; then
+  alias ca='cursor-agent'
+fi
 if command -v win32yank.exe > /dev/null 2>&1; then
   alias clip='win32yank.exe -i --crlf'
 fi
