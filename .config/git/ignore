@@ -1,19 +1,9 @@
 ### Personal ###
-# mise
-mise.local.toml
-
-# asdf
-.tool-versions
-
 # Python
 pyrightconfig.json
 
-# env
-.env
-.venv
-
-# none-ls (null-ls)
-.null-ls_*
+# Claude Code
+**/.claude/settings.local.json
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/macos
