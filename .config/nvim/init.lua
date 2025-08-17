@@ -3,6 +3,9 @@ local config = require('config')
 local opts = config.opts
 local opts_noremap = config.opts_noremap
 
+-- Use local setting
+vim.o.exrc = true
+
 -- Leader
 vim.g.mapleader = ' '
 
