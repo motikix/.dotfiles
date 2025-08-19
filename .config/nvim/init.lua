@@ -180,5 +180,4 @@ end, {
 vim.api.nvim_set_keymap('n', '<Leader>tf', ':ToggleFormat<CR>', opts)
 vim.api.nvim_set_keymap('n', '<Leader>tF', ':ToggleFormat!<CR>', opts)
 
-require('misc')
 require('bootstrap')
