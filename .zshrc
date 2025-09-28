@@ -169,12 +169,8 @@ export FZF_ALT_C_OPTS="--preview '$FZF_PREVIEW_DIR_CMD {}'"
 # bin
 export PATH=$HOME/.local/bin:$PATH
 
-# pnpm
-export PNPM_HOME="$HOME/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
+# npm
+export NPM_CONFIG_PREFIX="$HOME/.local"
 
 # go
 export GOPATH=$HOME/go
