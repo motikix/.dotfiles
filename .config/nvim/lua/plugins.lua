@@ -195,7 +195,7 @@ return {
     end,
     config = function()
       require('bufferline').setup({
-        highlights = require('catppuccin.groups.integrations.bufferline').get_theme(),
+        highlights = require('catppuccin.special.bufferline').get_theme(),
         options = {
           diagnostics = 'nvim_lsp',
           diagnostics_indicator = function(_, _, diagnostics_dict, _)
@@ -226,7 +226,7 @@ return {
       'catppuccin/nvim',
     },
     config = function()
-      local ctp_feline = require('catppuccin.groups.integrations.feline')
+      local ctp_feline = require('catppuccin.special.feline')
       ctp_feline.setup()
       require('feline').setup({
         components = ctp_feline.get_statusline(),
