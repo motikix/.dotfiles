@@ -1,1 +1,3 @@
 .luarc.json
+.codex/*
+!.codex/prompts/
