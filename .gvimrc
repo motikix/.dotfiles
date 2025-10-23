@@ -1,5 +1,5 @@
 set guioptions-=T
-set guifont=Moralerspace\ Radon\ HW:h16
+set guifont=Moralerspace\ Radon\ HW:h14
 
 set iminsert=2
 
