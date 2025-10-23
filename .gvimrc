@@ -1,6 +1,8 @@
 set guioptions-=T
 set guifont=Moralerspace\ Radon\ HW:h16
 
+set iminsert=2
+
 nnoremap <A-=> :call AdjustFontSize(1)<CR>
 nnoremap <A--> :call AdjustFontSize(-1)<CR>
 
