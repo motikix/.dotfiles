@@ -166,7 +166,10 @@ return {
   },
 
   -- Buffer
-  { 'tiagovla/scope.nvim',        event = 'VeryLazy' },
+  {
+    'tiagovla/scope.nvim',
+    event = 'VeryLazy',
+  },
   {
     'famiu/bufdelete.nvim',
     keys = { '<Leader>bD', '<Leader>baD' },
@@ -237,15 +240,22 @@ return {
   -- Treesitter
   {
     'nvim-treesitter/nvim-treesitter',
-    branch = 'master',
-    event = { 'BufReadPost', 'BufNewFile' },
+    branch = 'main',
+    lazy = false,
     build = ':TSUpdate',
-    dependencies = {
-      'yioneko/nvim-yati',
-      'RRethy/nvim-treesitter-endwise',
-    },
+    dependencies = { 'RRethy/nvim-treesitter-endwise' },
+    init = function()
+      vim.api.nvim_create_autocmd('FileType', {
+        group = vim.api.nvim_create_augroup('vim-treesitter-start', {}),
+        callback = function()
+          vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+          pcall(vim.treesitter.start)
+        end,
+      })
+    end,
     config = function()
-      require('treesitter')
+      require('nvim-treesitter').setup()
     end,
   },
   {
@@ -476,14 +486,27 @@ return {
       },
     },
   },
-  { 'gpanders/editorconfig.nvim', event = { 'BufReadPost', 'BufNewFile' } },
+  {
+    'gpanders/editorconfig.nvim',
+    event = { 'BufReadPost', 'BufNewFile' },
+  },
   {
     'kylechui/nvim-surround',
     version = '*',
     event = 'VeryLazy',
     config = true,
   },
-  { 'andymass/vim-matchup',    event = { 'BufReadPost', 'BufNewFile' } },
+  {
+    'andymass/vim-matchup',
+    event = { 'BufReadPost', 'BufNewFile' },
+    opts = {
+      treesitter = {
+        enable_quotes = true,
+        disable_virtual_text = true,
+        include_match_words = true,
+      },
+    },
+  },
   {
     'norcalli/nvim-colorizer.lua',
     event = { 'BufReadPost', 'BufNewFile' },
@@ -785,7 +808,7 @@ return {
     keys = {
       { '<Leader>ha', ':HurlRunnerAt<CR>' },
       { '<Leader>hA', ':HurlRunner<CR>' },
-      { '<Leader>hh', ':HurlRunner<CR>',  mode = 'v' },
+      { '<Leader>hh', ':HurlRunner<CR>', mode = 'v' },
     },
   },
 
