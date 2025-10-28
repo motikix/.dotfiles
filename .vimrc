@@ -33,3 +33,5 @@ set clipboard=unnamed,unnamedplus
 
 set splitbelow
 set splitright
+
+syntax on
