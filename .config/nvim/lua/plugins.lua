@@ -15,70 +15,10 @@ return {
 
   -- Color
   {
-    'catppuccin/nvim',
-    name = 'catppuccin',
-    lazy = false,
-    priority = 1000,
-    init = function()
-      vim.g.catppuccin_flavour = 'mocha'
-    end,
+    'rose-pine/neovim',
+    name = 'rose-pine',
     config = function()
-      require('catppuccin').setup({
-        transparent_background = true,
-        show_end_of_buffer = false,
-        term_colors = true,
-        dim_inactive = {
-          enabled = false,
-        },
-        styles = {
-          comments = { 'italic' },
-          conditionals = { 'italic' },
-          functions = { 'italic' },
-          keywords = { 'italic' },
-          types = { 'italic' },
-        },
-        integrations = {
-          blink_cmp = {
-            style = 'bordered',
-          },
-          gitsigns = true,
-          lsp_trouble = true,
-          mason = true,
-          native_lsp = {
-            enabled = true,
-            virtual_text = {
-              errors = { 'italic' },
-              hints = { 'italic' },
-              warnings = { 'italic' },
-              information = { 'italic' },
-              ok = { 'italic' },
-            },
-            underlines = {
-              errors = { 'undercurl' },
-              hints = { 'undercurl' },
-              warnings = { 'undercurl' },
-              information = { 'undercurl' },
-              ok = { 'undercurl' },
-            },
-            inlay_hints = {
-              background = true,
-            },
-          },
-          noice = true,
-          nvim_surround = true,
-          render_markdown = true,
-          semantic_tokens = true,
-          telescope = {
-            enabled = true,
-          },
-          treesitter = true,
-          treesitter_context = true,
-        },
-      })
-      vim.cmd([[colorscheme catppuccin]])
-      -- Show current line
-      vim.api.nvim_set_hl(0, 'CursorLine', { underline = true })
-      vim.wo.cursorline = true
+      vim.cmd([[colorscheme rose-pine]])
     end,
   },
 
@@ -185,7 +125,6 @@ return {
     version = '*',
     dependencies = {
       'nvim-tree/nvim-web-devicons',
-      'catppuccin/nvim',
     },
     init = function()
       vim.api.nvim_set_keymap('n', '<Leader>bs', ':BufferLinePick<CR>', opts)
@@ -198,7 +137,7 @@ return {
     end,
     config = function()
       require('bufferline').setup({
-        highlights = require('catppuccin.special.bufferline').get_theme(),
+        highlights = require('rose-pine.plugins.bufferline'),
         options = {
           diagnostics = 'nvim_lsp',
           diagnostics_indicator = function(_, _, diagnostics_dict, _)
@@ -223,16 +162,13 @@ return {
 
   -- Statusline
   {
-    'feline-nvim/feline.nvim',
-    dependencies = {
-      'nvim-tree/nvim-web-devicons',
-      'catppuccin/nvim',
-    },
+    'nvim-lualine/lualine.nvim',
+    event = 'ColorScheme',
     config = function()
-      local ctp_feline = require('catppuccin.special.feline')
-      ctp_feline.setup()
-      require('feline').setup({
-        components = ctp_feline.get_statusline(),
+      require('lualine').setup({
+        options = {
+          theme = 'rose-pine',
+        },
       })
     end,
   },
@@ -400,14 +336,7 @@ return {
   -- Editor Support
   {
     'm-demare/hlargs.nvim',
-    dependencies = {
-      'catppuccin/nvim',
-    },
-    config = function()
-      require('hlargs').setup({
-        color = require('catppuccin.palettes').get_palette('mocha').red,
-      })
-    end,
+    config = true,
   },
   {
     'shellRaining/hlchunk.nvim',
@@ -596,6 +525,7 @@ return {
             return term.name
           end,
         },
+        highlights = require('rose-pine.plugins.toggleterm'),
       })
     end,
   },

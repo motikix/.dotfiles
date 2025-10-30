@@ -162,10 +162,11 @@ export FZF_PREVIEW_DIR_CMD='eza -1 --color=always'
 export FZF_DEFAULT_COMMAND='fd --hidden --follow --exclude .git'
 export FZF_DEFAULT_OPTS="\
   --height 40% --layout=reverse --border --bind ctrl-u:preview-up,ctrl-d:preview-down \
-  --color=bg+:-1,bg:-1,spinner:#f5e0dc,hl:#f38ba8 \
-  --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
-  --color=marker:#b4befe,fg+:#f2cdcd,prompt:#cba6f7,hl+:#f38ba8 \
-  --color=selected-bg:#45475a \
+	--color=fg:#908caa,bg:#191724,hl:#ebbcba \
+	--color=fg+:#e0def4,bg+:#26233a,hl+:#ebbcba \
+	--color=border:#403d52,header:#31748f,gutter:#191724 \
+	--color=spinner:#f6c177,info:#9ccfd8 \
+	--color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa \
   --multi"
 export FZF_CTRL_T_OPTS="--preview '$FZF_PREVIEW_FILE_CMD {}'"
 export FZF_ALT_C_OPTS="--preview '$FZF_PREVIEW_DIR_CMD {}'"
