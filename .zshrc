@@ -80,11 +80,6 @@ zstyle ':fzf-tab:*' use-fzf-default-opts yes
 zstyle ':fzf-tab:*' switch-group '<' '>'
 zstyle ':fzf-tab:*' fzf-min-height 20
 
-zinit ice depth=1; zinit light romkatv/powerlevel10k
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
 #--------------------------------------------------------------------#
 #                             functions                              #
 #--------------------------------------------------------------------#
@@ -129,6 +124,10 @@ fi
 if command -v zoxide > /dev/null 2>&1; then
   export _ZO_FZF_OPTS=($FZF_DEFAULT_OPTS "--preview '$FZF_PREVIEW_DIR_CMD {2..}'")
   eval "$(zoxide init zsh)"
+fi
+
+if command -v starship > /dev/null 2>&1; then
+  eval "$(starship init zsh)"
 fi
 
 #--------------------------------------------------------------------#
