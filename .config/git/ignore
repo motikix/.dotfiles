@@ -1,7 +1,3 @@
-### Personal ###
-# Python
-pyrightconfig.json
-
 # Claude Code
 **/.claude/settings.local.json
 
