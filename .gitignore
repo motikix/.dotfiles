@@ -1,3 +1,6 @@
 .luarc.json
 .codex/*
 !.codex/prompts/
+.claude/*
+!.claude/commands/
+!.claude/settings.json

@@ -1,0 +1,1 @@
+@~/.codex/prompts/commit.md
