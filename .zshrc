@@ -109,8 +109,8 @@ function gi() { curl -sLw "\n" https://www.toptal.com/developers/gitignore/api/$
 #                               setup                                #
 #--------------------------------------------------------------------#
 
-if command -v devbox > /dev/null 2>&1; then
-  eval "$(devbox global shellenv)"
+if command -v mise > /dev/null 2>&1; then
+  eval "$(mise activate zsh)"
 fi
 
 if command -v direnv > /dev/null 2>&1; then

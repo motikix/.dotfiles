@@ -1,4 +1,5 @@
 set shortmess+=I
+set shortmess-=S
 
 set noerrorbells
 set novisualbell
@@ -29,9 +30,18 @@ set expandtab
 set autoindent
 set smartindent
 
+set ignorecase
+set smartcase
+set incsearch
+set wrapscan
+set hlsearch
+
 set clipboard=unnamed,unnamedplus
 
 set splitbelow
 set splitright
+
+nnoremap <silent> <C-w>N :vnew<CR>
+nnoremap <silent> <C-l> :nohlsearch<CR><C-l>
 
 syntax on
