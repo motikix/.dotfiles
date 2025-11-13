@@ -15,10 +15,70 @@ return {
 
   -- Color
   {
-    'rose-pine/neovim',
-    name = 'rose-pine',
+    'catppuccin/nvim',
+    name = 'catppuccin',
+    lazy = false,
+    priority = 1000,
+    init = function()
+      vim.g.catppuccin_flavour = 'mocha'
+    end,
     config = function()
-      vim.cmd([[colorscheme rose-pine]])
+      require('catppuccin').setup({
+        transparent_background = false,
+        show_end_of_buffer = false,
+        term_colors = true,
+        dim_inactive = {
+          enabled = false,
+        },
+        styles = {
+          comments = { 'italic' },
+          conditionals = { 'italic' },
+          functions = { 'italic' },
+          keywords = { 'italic' },
+          types = { 'italic' },
+        },
+        integrations = {
+          blink_cmp = {
+            style = 'bordered',
+          },
+          gitsigns = true,
+          lsp_trouble = true,
+          mason = true,
+          native_lsp = {
+            enabled = true,
+            virtual_text = {
+              errors = { 'italic' },
+              hints = { 'italic' },
+              warnings = { 'italic' },
+              information = { 'italic' },
+              ok = { 'italic' },
+            },
+            underlines = {
+              errors = { 'undercurl' },
+              hints = { 'undercurl' },
+              warnings = { 'undercurl' },
+              information = { 'undercurl' },
+              ok = { 'undercurl' },
+            },
+            inlay_hints = {
+              background = true,
+            },
+          },
+          noice = true,
+          nvim_surround = true,
+          render_markdown = true,
+          semantic_tokens = true,
+          telescope = {
+            enabled = true,
+          },
+          treesitter = true,
+          treesitter_context = true,
+        },
+      })
+      vim.cmd([[colorscheme catppuccin]])
+      -- Show current line
+      vim.api.nvim_set_hl(0, 'CursorLine', { underline = true })
+      vim.wo.cursorline = true
     end,
   },
 
@@ -137,7 +197,7 @@ return {
     end,
     config = function()
       require('bufferline').setup({
-        highlights = require('rose-pine.plugins.bufferline'),
+        highlights = require('catppuccin.special.bufferline').get_theme(),
         options = {
           diagnostics = 'nvim_lsp',
           diagnostics_indicator = function(_, _, diagnostics_dict, _)
@@ -167,7 +227,7 @@ return {
     config = function()
       require('lualine').setup({
         options = {
-          theme = 'rose-pine',
+          theme = 'catppuccin',
         },
       })
     end,
@@ -525,7 +585,6 @@ return {
             return term.name
           end,
         },
-        highlights = require('rose-pine.plugins.toggleterm'),
       })
     end,
   },
