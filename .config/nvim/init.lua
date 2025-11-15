@@ -123,6 +123,9 @@ vim.o.incsearch = true
 vim.o.wrapscan = true
 vim.o.hlsearch = true
 
+-- Nohl
+vim.api.nvim_set_keymap('n', '<C-[>', ':nohl<CR><ESC>', opts)
+
 -- Diagnostic
 vim.api.nvim_set_keymap('n', '[d', '<Cmd>lua vim.diagnostic.goto_prev({ float = false })<Cr>', opts)
 vim.api.nvim_set_keymap('n', ']d', '<Cmd>lua vim.diagnostic.goto_next({ float = false })<Cr>', opts)

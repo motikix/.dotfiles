@@ -1,4 +1,7 @@
 .luarc.json
+.cursor/*
+!.cursor/commands/
+!.cursor/mcp.json
 .codex/*
 !.codex/prompts/
 .claude/*

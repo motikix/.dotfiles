@@ -42,6 +42,6 @@ set splitbelow
 set splitright
 
 nnoremap <silent> <C-w>N :vnew<CR>
-nnoremap <silent> <C-l> :nohlsearch<CR><C-l>
+nnoremap <silent> <C-[> :nohl<CR><ESC>
 
 syntax on

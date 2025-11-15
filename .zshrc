@@ -205,6 +205,9 @@ if command -v nvim > /dev/null 2>&1; then
   alias vim='nvim'
   alias vi='nvim --noplugin -c "set nohlsearch" -c "set inccommand=" -c "highlight Normal ctermbg=none guibg=none"'
 fi
+if command -v cursor-agent > /dev/null 2>&1; then
+  alias ca='cursor-agent'
+fi
 if command -v eza > /dev/null 2>&1; then
   alias ls='eza --icons'
   alias ll='eza --icons -l --header --git --git-repos --time-style=long-iso'
