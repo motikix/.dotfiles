@@ -229,13 +229,3 @@ if command -v win32yank.exe > /dev/null 2>&1; then
   alias clip='win32yank.exe -i --crlf'
 fi
 alias g++="g++ -std=c++23 -Wall"
-
-#--------------------------------------------------------------------#
-#                               tmux                                 #
-#--------------------------------------------------------------------#
-
-if command -v tmux > /dev/null 2>&1; then
-  if [[ -z "$TMUX" ]] && [[ -z "$VSCODE_PID" ]] && [[ -z "$VSCODE_INJECTION" ]]; then
-    tmux && exit
-  fi
-fi
