@@ -2,6 +2,9 @@
 .cursor/*
 !.cursor/commands/
 !.cursor/mcp.json
+.gemini/*
+!.gemini/commands/
+!.gemini/settings.json
 .codex/*
 !.codex/prompts/
 .claude/*
