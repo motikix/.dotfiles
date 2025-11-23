@@ -235,7 +235,7 @@ alias g++="g++ -std=c++23 -Wall"
 #--------------------------------------------------------------------#
 
 if command -v tmux > /dev/null 2>&1; then
-  if [[ -z "$TMUX" ]] && [[ -z "$VSCODE_PID" ]] && [[ -z "$VSCODE_INJECTION" ]]; then
+  if [[ -z "$TMUX" ]] && [[ "$TERM_PROGRAM" != 'vscode' ]]; then
     tmux && exit
   fi
 fi
