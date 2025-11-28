@@ -27,6 +27,8 @@
         "${CONTEXT7_API_KEY}"
       ]
     }
+  },
+  "general": {
+    "previewFeatures": true
   }
 }
-
