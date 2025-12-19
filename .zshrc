@@ -205,9 +205,6 @@ if command -v nvim > /dev/null 2>&1; then
   alias vim='nvim'
   alias vi='nvim --noplugin -c "set nohlsearch" -c "set inccommand=" -c "highlight Normal ctermbg=none guibg=none"'
 fi
-if command -v cursor-agent > /dev/null 2>&1; then
-  alias ca='cursor-agent'
-fi
 if command -v eza > /dev/null 2>&1; then
   alias ls='eza --icons'
   alias ll='eza --icons -l --header --git --git-repos --time-style=long-iso'
@@ -235,7 +232,7 @@ alias g++="g++ -std=c++23 -Wall"
 #--------------------------------------------------------------------#
 
 if command -v tmux > /dev/null 2>&1; then
-  if [[ -z "$TMUX" ]] && [[ "$TERM_PROGRAM" != 'vscode' ]]; then
+  if [[ -z "$TMUX" ]] && [[ "$TERM_PROGRAM" != 'vscode' ]] && [[ "$TERM_PROGRAM" != 'kiro' ]]; then
     tmux && exit
   fi
 fi
