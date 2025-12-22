@@ -8,5 +8,8 @@
 .codex/*
 !.codex/prompts/
 .claude/*
+.claude/*
+!.claude/agents/
 !.claude/commands/
+!.claude/skills/
 !.claude/settings.json
