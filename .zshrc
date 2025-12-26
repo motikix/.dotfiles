@@ -2,6 +2,7 @@
 #                            zsh options                             #
 #--------------------------------------------------------------------#
 
+setopt emacs
 setopt no_beep
 setopt no_list_beep
 setopt ignore_eof
