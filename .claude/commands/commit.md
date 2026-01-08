@@ -41,4 +41,3 @@ If additional rules are provided below, they take precedence over the above rule
 * Do not include blank lines between items in list formatting.
 * $ARGUMENTS
 ```
-"""
