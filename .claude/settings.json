@@ -1,3 +1,6 @@
 {
-  "includeCoAuthoredBy": false
+  "includeCoAuthoredBy": false,
+  "enabledPlugins": {
+    "example-skills@anthropic-agent-skills": true
+  }
 }
