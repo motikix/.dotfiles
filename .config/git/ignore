@@ -1,5 +1,12 @@
 # mise
 **/mise.toml
+
+# neovim
+**/.nvim.lua
+**/.nvimrc
+**/.exrc
+
+# claude code
 **/.claude/settings.local.json
 
 # Created by https://www.toptal.com/developers/gitignore/api/macos

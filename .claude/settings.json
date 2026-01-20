@@ -1,5 +1,6 @@
 {
   "includeCoAuthoredBy": false,
+  "plansDirectory": "./plans/",
   "enabledPlugins": {
     "example-skills@anthropic-agent-skills": true
   }
