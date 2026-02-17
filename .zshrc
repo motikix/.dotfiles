@@ -98,13 +98,19 @@ function _fzf_ghq() {
   zle reset-prompt
 }
 zle -N _fzf_ghq
-bindkey "^g" _fzf_ghq
 
 function _do_nothing() {}
 zle -N _do_nothing
-bindkey "^d" _do_nothing
 
 function gi() { curl -sLw "\n" https://www.toptal.com/developers/gitignore/api/$@ ;}
+
+#--------------------------------------------------------------------#
+#                             key binds                              #
+#--------------------------------------------------------------------#
+
+bindkey "^g" _fzf_ghq
+bindkey "^d" _do_nothing
+bindkey -r "^S"
 
 #--------------------------------------------------------------------#
 #                               setup                                #
@@ -152,6 +158,9 @@ export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
 export XDG_STATE_HOME=$HOME/.local/state
+
+# stty
+stty -ixon
 
 # gpg
 export GPG_TTY=$(tty)
