@@ -1,8 +1,8 @@
 {
   "includeCoAuthoredBy": false,
+  "model": "opus",
   "enabledPlugins": {
     "example-skills@anthropic-agent-skills": true
   },
-  "plansDirectory": "./.claude/plans/",
-  "model": "opus"
+  "plansDirectory": "./.claude/plans/"
 }
