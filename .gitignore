@@ -1,14 +1,13 @@
 .luarc.json
-.cursor/*
-!.cursor/commands/
-!.cursor/mcp.json
 .gemini/*
+!.gemini/skills
 !.gemini/commands/
 !.gemini/settings.json
 .codex/*
+!.codex/skills
 !.codex/prompts/
 .claude/*
 !.claude/agents/
 !.claude/commands/
-!.claude/skills/
+!.claude/skills
 !.claude/settings.json

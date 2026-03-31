@@ -1,3 +1,7 @@
+---
+name: commit
+description: Commit staged files
+---
 Please commit the contents staged in Git in accordance with the Conventional Commits specification.
 
 Message structure:

@@ -1,4 +1,5 @@
 ---
+name: export-plan
 description: 現在のセッションの調査・設計・タスク内容を他AIエージェント（Codex CLI等）用プロンプトに変換
 ---
 
