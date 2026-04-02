@@ -4,30 +4,7 @@
       "selectedType": "oauth-personal"
     }
   },
-  "mcpServers": {
-    "serena": {
-      "command": "uvx",
-      "args": [
-        "--from",
-        "git+https://github.com/oraios/serena",
-        "serena",
-        "start-mcp-server",
-        "--context",
-        "ide-assistant",
-        "--enable-web-dashboard",
-        "false"
-      ]
-    },
-    "context7": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@upstash/context7-mcp",
-        "--api-key",
-        "${CONTEXT7_API_KEY}"
-      ]
-    }
-  },
+  "mcpServers": {},
   "general": {
     "previewFeatures": true,
     "sessionRetention": {
@@ -37,3 +14,4 @@
     }
   }
 }
+

@@ -1,4 +1,5 @@
 .luarc.json
+.agents/skills/.system/
 .gemini/*
 !.gemini/skills
 !.gemini/commands/
