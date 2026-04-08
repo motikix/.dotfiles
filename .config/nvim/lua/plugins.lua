@@ -227,7 +227,7 @@ return {
     config = function()
       require('lualine').setup({
         options = {
-          theme = 'catppuccin',
+          theme = 'catppuccin-nvim',
         },
       })
     end,
@@ -761,6 +761,12 @@ return {
         border = 'thin',
       },
     },
+  },
+  {
+    'hedyhli/markdown-toc.nvim',
+    ft = 'markdown',
+    cmd = { 'Mtoc' },
+    opts = {},
   },
   {
     'linux-cultist/venv-selector.nvim',

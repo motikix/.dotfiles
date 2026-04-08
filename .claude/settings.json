@@ -1,6 +1,5 @@
 {
   "includeCoAuthoredBy": false,
-  "model": "opus",
   "enabledPlugins": {
     "example-skills@anthropic-agent-skills": true
   },
