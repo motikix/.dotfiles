@@ -3,5 +3,6 @@
   "enabledPlugins": {
     "example-skills@anthropic-agent-skills": true
   },
-  "plansDirectory": "./.claude/plans/"
+  "plansDirectory": "./.claude/plans/",
+  "model": "opusplan"
 }
