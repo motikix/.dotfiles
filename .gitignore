@@ -1,12 +1,5 @@
 .luarc.json
 .agents/skills/.system/
 .gemini/*
-!.gemini/commands/
-!.gemini/settings.json
-.codex/*
-!.codex/prompts/
-.claude/*
-!.claude/agents/
-!.claude/commands/
-!.claude/skills
-!.claude/settings.json
+.config/herdr/*
+!.config/herdr/config.toml

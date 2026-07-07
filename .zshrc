@@ -241,8 +241,8 @@ alias g++="g++ -std=c++23 -Wall"
 #                               tmux                                 #
 #--------------------------------------------------------------------#
 
-if command -v tmux > /dev/null 2>&1; then
-  if [[ -z "$TMUX" ]] && [[ "$TERM_PROGRAM" != 'vscode' ]] && [[ "$TERM_PROGRAM" != 'kiro' ]]; then
-    tmux && exit
+if command -v herdr > /dev/null 2>&1; then
+  if [[ -z "$HERDR_ENV" ]] && [[ "$TERM_PROGRAM" != 'vscode' ]] && [[ "$TERM_PROGRAM" != 'kiro' ]]; then
+    exec herdr
   fi
 fi
