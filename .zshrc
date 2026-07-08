@@ -243,6 +243,6 @@ alias g++="g++ -std=c++23 -Wall"
 
 if command -v herdr > /dev/null 2>&1; then
   if [[ -z "$HERDR_ENV" ]] && [[ "$TERM_PROGRAM" != 'vscode' ]] && [[ "$TERM_PROGRAM" != 'kiro' ]]; then
-    exec herdr
+    herdr
   fi
 fi
