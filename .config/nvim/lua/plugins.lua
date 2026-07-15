@@ -71,7 +71,6 @@ return {
           telescope = {
             enabled = true,
           },
-          treesitter = true,
           treesitter_context = true,
         },
       })
@@ -235,24 +234,13 @@ return {
 
   -- Treesitter
   {
-    'nvim-treesitter/nvim-treesitter',
-    branch = 'main',
-    lazy = false,
-    build = ':TSUpdate',
-    dependencies = { 'RRethy/nvim-treesitter-endwise' },
-    init = function()
-      vim.api.nvim_create_autocmd('FileType', {
-        group = vim.api.nvim_create_augroup('vim-treesitter-start', {}),
-        callback = function()
-          vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-          pcall(vim.treesitter.start)
-        end,
-      })
-    end,
-    config = function()
-      require('nvim-treesitter').setup()
-    end,
+    'romus204/tree-sitter-manager.nvim',
+    opts = {
+      ensure_installed = 'all',
+    },
+  },
+  {
+    'RRethy/nvim-treesitter-endwise',
   },
   {
     'nvim-treesitter/nvim-treesitter-context',
@@ -429,7 +417,6 @@ return {
   {
     'numToStr/Comment.nvim',
     dependencies = {
-      'nvim-treesitter/nvim-treesitter',
       'JoosepAlviste/nvim-ts-context-commentstring',
     },
     config = function()
@@ -552,7 +539,6 @@ return {
   },
   {
     'Wansmer/treesj',
-    dependencies = { 'nvim-treesitter/nvim-treesitter' },
     keys = { '<Space>m', '<Space>j', '<Space>s' },
     init = function()
       vim.keymap.set('n', '<Space>M', function()
@@ -787,7 +773,6 @@ return {
     dependencies = {
       'MunifTanjim/nui.nvim',
       'nvim-lua/plenary.nvim',
-      'nvim-treesitter/nvim-treesitter',
     },
     ft = 'hurl',
     opts = {

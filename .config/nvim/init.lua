@@ -1,3 +1,7 @@
+if vim.loader then
+  vim.loader.enable()
+end
+
 -- locals
 local config = require('config')
 local opts = config.opts
@@ -142,10 +146,6 @@ vim.api.nvim_create_user_command('Grep', function(opts)
   vim.cmd('silent grep!' .. ' ' .. opts.args)
   vim.cmd('copen')
 end, { nargs = '*', complete = 'file' })
-
--- Nvim clients
-vim.g.python_host_prog = vim.fn.exepath('/usr/bin/python2')
-vim.g.python3_host_prog = vim.fn.exepath('/usr/bin/python3')
 
 -- Colors
 vim.o.termguicolors = true
