@@ -124,6 +124,10 @@ if command -v direnv > /dev/null 2>&1; then
   eval "$(direnv hook zsh)"
 fi
 
+if command -v jj > /dev/null 2>&1; then
+  source <(jj util completion zsh)
+fi
+
 if command -v fzf > /dev/null 2>&1; then
   source <(fzf --zsh)
 fi
