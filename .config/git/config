@@ -4,20 +4,14 @@
 [core]
 	quotepath = false
 	autocrlf = false
-	pager = delta
 [init]
 	defaultBranch = main
 [pull]
 	rebase = false
 [diff]
-	colorMoved = default
+  external = difft
 [merge]
 	conflictstyle = diff3
-[interactive]
-	diffFilter = delta --color-only
-[delta]
-	navigate = true
-	side-by-side = true
 [ghq]
 	root = ~/.local/src
 [url "https://"]
