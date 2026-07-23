@@ -40,5 +40,6 @@ If additional rules are provided below, they take precedence over the above rule
 * Use a here document in the commit message.
 * Include as much detail as possible in the commit body.
 * Do not include blank lines between items in list formatting.
+* Choose the commit message language from the current conversation by default: a Japanese request such as "コミットして" means Japanese; an English request such as "commit changes" means English. If mixed or unclear, use the dominant or most recent user-facing language. An explicit language instruction in $ARGUMENTS takes precedence over this inference.
 * $ARGUMENTS
 ```
