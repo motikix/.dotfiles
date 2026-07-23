@@ -16,7 +16,7 @@ remove_worktree = "prefix+ctrl+d"
 pane_borders = false
 pane_gaps = false
 
-agent_panel_sort = "spaces"
+agent_panel_sort = "priority"
 
 [ui.toast]
 delivery = "herdr"
