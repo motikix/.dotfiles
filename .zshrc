@@ -102,10 +102,6 @@ if command -v mise > /dev/null 2>&1; then
   eval "$(mise activate zsh)"
 fi
 
-if command -v direnv > /dev/null 2>&1; then
-  eval "$(direnv hook zsh)"
-fi
-
 if command -v herdr > /dev/null 2>&1; then
   source <(herdr completion zsh)
 fi
@@ -121,6 +117,18 @@ fi
 if command -v zoxide > /dev/null 2>&1; then
   export _ZO_FZF_OPTS=($FZF_DEFAULT_OPTS "--preview '$FZF_PREVIEW_DIR_CMD {2..}'")
   eval "$(zoxide init zsh)"
+fi
+
+if command -v rg > /dev/null 2>&1; then
+  source <(rg --generate=complete-zsh)
+fi
+
+if command -v yq > /dev/null 2>&1; then
+  source <(yq completion zsh)
+fi
+
+if command -v xh > /dev/null 2>&1; then
+  source <(xh --generate complete-zsh)
 fi
 
 if command -v starship > /dev/null 2>&1; then
