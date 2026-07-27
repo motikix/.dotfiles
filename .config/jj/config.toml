@@ -1,6 +1,10 @@
-[ui]
-diff-formatter = ["difft", "--color=always", "$left", "$right"]
-
 [user]
 name = "motikix"
 email = "25551031+motikix@users.noreply.github.com"
+
+[working-copy]
+eol-conversion = "none"
+
+[ui]
+default-command = "status"
+diff-formatter = ["difft", "--color=always", "$left", "$right"]
