@@ -107,7 +107,7 @@ if command -v herdr > /dev/null 2>&1; then
 fi
 
 if command -v jj > /dev/null 2>&1; then
-  source <(jj util completion zsh)
+  source <(COMPLETE=zsh jj)
 fi
 
 if command -v fzf > /dev/null 2>&1; then
@@ -129,6 +129,10 @@ fi
 
 if command -v xh > /dev/null 2>&1; then
   source <(xh --generate complete-zsh)
+fi
+
+if command -v sops > /dev/null 2>&1; then
+  source <(sops completion zsh)
 fi
 
 if command -v starship > /dev/null 2>&1; then
