@@ -1,6 +1,2 @@
 .luarc.json
-.config/jj/*
-!.config/jj/config.toml
-.config/herdr/*
-!.config/herdr/config.toml
 .agents/skills/.system/

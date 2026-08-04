@@ -212,6 +212,10 @@ export AWS_VAULT_BACKEND=pass
 # turso
 export PATH=$HOME/.turso:$PATH
 
+# opencode
+export PATH=$HOME/.opencode/bin:$PATH
+
+
 #--------------------------------------------------------------------#
 #                              aliases                               #
 #--------------------------------------------------------------------#
