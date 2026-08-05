@@ -1,1 +1,1 @@
-/home/moti/.dotfiles/.agents/AGENTS.md
+../.agents/AGENTS.md
