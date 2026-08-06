@@ -4,14 +4,19 @@
 [core]
 	quotepath = false
 	autocrlf = false
+	pager = hunk pager
 [init]
 	defaultBranch = main
 [pull]
 	rebase = false
 [diff]
-  external = difft
+	tool = hunk
+[difftool "hunk"]
+	cmd = ["hunk", "difftool", "$LOCAL", "$REMOTE", "$MERGED"]
+[difftool]
+	prompt = false
 [merge]
-	conflictstyle = diff3
+	conflictstyle = zdiff3
 [ghq]
 	root = ~/.local/src
 [url "https://"]

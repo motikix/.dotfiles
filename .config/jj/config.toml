@@ -6,5 +6,6 @@ email = "25551031+motikix@users.noreply.github.com"
 eol-conversion = "none"
 
 [ui]
-default-command = "status"
-diff-formatter = ["difft", "--color=always", "$left", "$right"]
+default-command = ["status", "--no-pager"]
+pager = ["hunk", "pager"]
+diff-formatter = ":git"

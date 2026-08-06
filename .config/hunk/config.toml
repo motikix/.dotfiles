@@ -1,0 +1,4 @@
+theme = "cappuccino-mocha"
+mode = "auto"
+menu_bar = false
+agent_notes = true
