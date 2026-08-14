@@ -10,3 +10,5 @@
 - Post review findings to that Hunk session using the `hunk-review` skill.
 - Write Hunk comments and the final review response in the language used in the user's review request, unless the user specifies another language.
 - If Herdr is unavailable or the Hunk session cannot be launched, report that limitation and ask the user how to proceed.
+
+@RTK.md
