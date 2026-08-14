@@ -4,17 +4,12 @@
 [core]
 	quotepath = false
 	autocrlf = false
-	pager = hunk pager
 [init]
 	defaultBranch = main
 [pull]
 	rebase = false
 [diff]
-	tool = hunk
-[difftool "hunk"]
-	cmd = ["hunk", "difftool", "$LOCAL", "$REMOTE", "$MERGED"]
-[difftool]
-	prompt = false
+  external = difft
 [merge]
 	conflictstyle = zdiff3
 [ghq]
