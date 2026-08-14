@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "skills": {
+    "commit": {
+      "source": "./skills/commit",
+      "sourceType": "local",
+      "computedHash": "112f92d680e43d2eff9a1ac9d5c75fe08a6f320ee23281a17881fbf264473037"
+    },
+    "herdr": {
+      "source": "herdrdev/herdr",
+      "sourceType": "github",
+      "skillPath": "skills/herdr/SKILL.md",
+      "computedHash": "1bb439a747faf436ca9871fec762940a27409f58ebb4f43ca7f9cc5a0d23197e"
+    }
+  }
+}

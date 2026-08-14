@@ -1,2 +1,10 @@
-* [MUST] `jj root` が `exitcode=0` を返す場合、VCSとして `jj` を使用し、それ以外は `git` を使用する
-* [MUST] レビュー実施時は、`herdr` スキルで同一タブに新規ペインを立ち上げ、`hunk-review` スキルでコメントする
+## Version control
+
+- At the start of work in a repository, run `jj root`.
+- If `jj root` exits with status 0, use `jj` for all subsequent version-control operations. Otherwise, use `git`.
+
+## Code review
+
+- When asked to perform a code review, use the `herdr` skill to open a new pane in the current tab.
+- Post review findings to the active Hunk session using the `hunk-review` skill.
+- If Herdr or an active Hunk session is unavailable, report that limitation and ask the user how to proceed.
