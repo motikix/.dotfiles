@@ -11,6 +11,12 @@
       "sourceType": "github",
       "skillPath": "skills/herdr/SKILL.md",
       "computedHash": "1bb439a747faf436ca9871fec762940a27409f58ebb4f43ca7f9cc5a0d23197e"
+    },
+    "hunk-review": {
+      "source": "modem-dev/hunk",
+      "sourceType": "github",
+      "skillPath": "skills/hunk-review/SKILL.md",
+      "computedHash": "9e21bc98b4201b1753250e617dd66dad417c2392c8f362158eb2a82329a3899e"
     }
   }
 }
