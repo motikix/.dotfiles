@@ -22,7 +22,7 @@
       "source": "herdrdev/herdr",
       "sourceType": "github",
       "skillPath": "skills/herdr/SKILL.md",
-      "computedHash": "489d2c6ff7e951e47071fbc5446d99d20ea215fcc5e55b9e4ceaa5a578f22d06"
+      "computedHash": "77b9fb624aebcbfccfbc84d7ef3b938c70ecb9198c8bbfee95b11751ba20bfb7"
     },
     "html": {
       "source": "plannotator/effective-html",
@@ -54,12 +54,6 @@
       "skillPath": "skills/html-wireframe/SKILL.md",
       "computedHash": "4506e8c9033431fc171a4953ffed582d2dea1432881f7f481a94fd54e6a0b660"
     },
-    "plannotator-annotate": {
-      "source": "backnotprop/plannotator",
-      "sourceType": "github",
-      "skillPath": "apps/skills/claude/plannotator-annotate/SKILL.md",
-      "computedHash": "f77af73c02ac989edf1a40e27da0f8ad34c74699d568c06e90b209c7f53e121f"
-    },
     "plannotator-compound": {
       "source": "backnotprop/plannotator",
       "sourceType": "github",
@@ -71,12 +65,6 @@
       "sourceType": "github",
       "skillPath": "apps/skills/claude/plannotator-last/SKILL.md",
       "computedHash": "33478a0a9b42d3e102043e6fd60adf9581cf85bc8a2520b7e4593183f4ef5180"
-    },
-    "plannotator-review": {
-      "source": "backnotprop/plannotator",
-      "sourceType": "github",
-      "skillPath": "apps/skills/claude/plannotator-review/SKILL.md",
-      "computedHash": "de93059bdef5c8cd2dfca6f3d32d4aa7382f8d0127bd88d488631c66dad2a597"
     },
     "plannotator-setup-goal": {
       "source": "backnotprop/plannotator",
