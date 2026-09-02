@@ -1,4 +1,5 @@
 /agent/*
 !/agent/AGENTS.md
+!/agent/RTK.md
 !/agent/settings.json
 /skills/*

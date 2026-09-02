@@ -6,12 +6,6 @@
       "sourceType": "local",
       "computedHash": "112f92d680e43d2eff9a1ac9d5c75fe08a6f320ee23281a17881fbf264473037"
     },
-    "design-artifact": {
-      "source": "plannotator/effective-html",
-      "sourceType": "github",
-      "skillPath": "skills/design-artifact/SKILL.md",
-      "computedHash": "241a1c8c8ccf12a56252cecc8aaeba5c7798f6e5b94f51b1b43a492f8d489f9f"
-    },
     "frontend-slides": {
       "source": "zarazhangrui/frontend-slides",
       "sourceType": "github",
@@ -24,59 +18,11 @@
       "skillPath": "skills/herdr/SKILL.md",
       "computedHash": "77b9fb624aebcbfccfbc84d7ef3b938c70ecb9198c8bbfee95b11751ba20bfb7"
     },
-    "html": {
-      "source": "plannotator/effective-html",
+    "visual-explainer": {
+      "source": "nicobailon/visual-explainer",
       "sourceType": "github",
-      "skillPath": "skills/html/SKILL.md",
-      "computedHash": "efb3a609da133e0e22e600777c9467a0281cc98467cdce2805c53126e417f862"
-    },
-    "html-diagram": {
-      "source": "plannotator/effective-html",
-      "sourceType": "github",
-      "skillPath": "skills/html-diagram/SKILL.md",
-      "computedHash": "b2bc1642ecf9bea473fd92993c87a1d05a1b53cc20192a8c04e78d86b47691db"
-    },
-    "html-plan": {
-      "source": "plannotator/effective-html",
-      "sourceType": "github",
-      "skillPath": "skills/html-plan/SKILL.md",
-      "computedHash": "1ccf3225f6ecc19a21c684b5e50fd67eb627cc36d03627c15f35cd479e34b8b2"
-    },
-    "html-prototype": {
-      "source": "plannotator/effective-html",
-      "sourceType": "github",
-      "skillPath": "skills/html-prototype/SKILL.md",
-      "computedHash": "c71292a9cc5f77970bf2d8b50a87213f4a014038c4f61a9da8f9b8b9ac272391"
-    },
-    "html-wireframe": {
-      "source": "plannotator/effective-html",
-      "sourceType": "github",
-      "skillPath": "skills/html-wireframe/SKILL.md",
-      "computedHash": "4506e8c9033431fc171a4953ffed582d2dea1432881f7f481a94fd54e6a0b660"
-    },
-    "plannotator-compound": {
-      "source": "backnotprop/plannotator",
-      "sourceType": "github",
-      "skillPath": "apps/skills/extra/plannotator-compound/SKILL.md",
-      "computedHash": "b565361cad06ac5db31940f9f0a6c18f6d3a9521b979350ae6948494d1ba0883"
-    },
-    "plannotator-last": {
-      "source": "backnotprop/plannotator",
-      "sourceType": "github",
-      "skillPath": "apps/skills/claude/plannotator-last/SKILL.md",
-      "computedHash": "33478a0a9b42d3e102043e6fd60adf9581cf85bc8a2520b7e4593183f4ef5180"
-    },
-    "plannotator-setup-goal": {
-      "source": "backnotprop/plannotator",
-      "sourceType": "github",
-      "skillPath": "apps/skills/extra/plannotator-setup-goal/SKILL.md",
-      "computedHash": "514ee10638ba0aa245a67fffa65fceaf5983875bd57f3a074ae856e0d0702601"
-    },
-    "plannotator-visual-explainer": {
-      "source": "backnotprop/plannotator",
-      "sourceType": "github",
-      "skillPath": "apps/skills/extra/plannotator-visual-explainer/SKILL.md",
-      "computedHash": "b70484fd259b8fb657145bf03009aaf2d9b249cb49a11a7d63f7532bac7db56c"
+      "skillPath": "plugins/visual-explainer/SKILL.md",
+      "computedHash": "568717ee7805a45eee27f02aa3f467f26bdcda33998f76363ae01666968d5a8b"
     }
   }
 }
