@@ -22,7 +22,19 @@
       "source": "herdrdev/herdr",
       "sourceType": "github",
       "skillPath": "skills/herdr/SKILL.md",
-      "computedHash": "77b9fb624aebcbfccfbc84d7ef3b938c70ecb9198c8bbfee95b11751ba20bfb7"
+      "computedHash": "c741134cc22372c08da2f469d49aac9f9bbddd4f5e1da0558cf1132836fa3287"
+    },
+    "herdr-pre-release-audit": {
+      "source": "herdrdev/herdr",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/herdr-pre-release-audit/SKILL.md",
+      "computedHash": "4f3f7a8874f5c2625dee7c0b74b02e4b3f6492a47f15cc99b4fe6d801ef6068b"
+    },
+    "herdr-throwaway-repro": {
+      "source": "herdrdev/herdr",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/herdr-throwaway-repro/SKILL.md",
+      "computedHash": "7cff831bca080d7acca578f5b21b344090b687f87b40017c88f3460c76554a71"
     },
     "html": {
       "source": "plannotator/effective-html",
@@ -89,6 +101,12 @@
       "sourceType": "github",
       "skillPath": "skills/ponytail-review/SKILL.md",
       "computedHash": "4646594fcd75455533f7ff1425f4f1c5ba0fa65f88241bf262b1c4fc275f049a"
+    },
+    "triage": {
+      "source": "herdrdev/herdr",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/triage/SKILL.md",
+      "computedHash": "18a52ea4f4d24f4f7d0390c88badaa5ef0db46ea86efdbd2c1b4d5b0d871af1c"
     }
   }
 }
